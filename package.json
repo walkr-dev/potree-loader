@@ -20,12 +20,16 @@
     "clean": "rimraf build",
     "start": "webpack --mode development --watch --progress",
     "start:example": "webpack-dev-server --config webpack.config.example.js --mode development --progress",
+    "start:cloudserver": "cd C:\\Users\\shiuk\\Documents\\The Lost Metropolis\\Documents\\3D assets\\Clouds && http-server --cors='*'",
+    "dev": "concurrently \"yarn start:example\" \"yarn start:cloudserver\"",
     "build": "npm run clean && npm run lint && webpack --mode production --progress --config webpack.config.prod.js",
     "lint": "tslint --project tsconfig.json",
     "prettier": "prettier --write \"**/*.js\" \"**/*.jsx\" \"**/*.tsx\" \"**/*.ts\"",
     "prepare-release": "standard-version"
   },
-  "dependencies": {},
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  },
   "peerDependencies": {
     "three": "^0.124.0"
   },

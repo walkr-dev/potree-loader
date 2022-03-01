@@ -10,6 +10,11 @@ document.body.appendChild(targetEl);
 
 const viewer = new Viewer();
 viewer.initialize(targetEl);
+const camera = viewer.camera;
+camera.far = 1000;
+camera.updateProjectionMatrix();
+camera.position.set(0, 0, 10);
+camera.lookAt(new Vector3());
 
 let pointCloud: PointCloudOctree | undefined;
 let loaded: boolean = false;
@@ -26,54 +31,32 @@ unloadBtn.addEventListener('click', () => {
   pointCloud = undefined;
 });
 
-const loadBtn = document.createElement('button');
-loadBtn.textContent = 'Load';
-loadBtn.addEventListener('click', () => {
-  if (loaded) {
-    return;
-  }
+viewer
+.load(
+  'cloud.js',
+  'http://localhost:8080/BigShotCleanV1/',
+)
+.then(pco => {
+  pointCloud = pco;
+  pointCloud.material.size = 1.0;
+  pointCloud.position.set(-4, -2, 1)
+  pointCloud.scale.set(.1, .1, .1);
 
-  loaded = true;
+  viewer.add(pco);
+})
+.catch(err => console.error(err));
 
-  viewer
-    .load(
-      'cloud.js',
-      'https://raw.githubusercontent.com/potree/potree/develop/pointclouds/lion_takanawa/',
-    )
-    .then(pco => {
-      pointCloud = pco;
-      pointCloud.rotateX(-Math.PI / 2);
-      pointCloud.material.size = 1.0;
+viewer
+.load(
+  'metadata.json',
+  'http://localhost:8080/BigShotCleanV2/',
+)
+.then(pco => {
+  pointCloud = pco;
+  pointCloud.material.size = 1.0;
+  pointCloud.position.set(0, -2, 1)
+  pointCloud.scale.set(.1, .1, .1);
+  viewer.add(pco);
+})
+.catch(err => console.error(err));
 
-      const camera = viewer.camera;
-      camera.far = 1000;
-      camera.updateProjectionMatrix();
-      camera.position.set(0, 0, 10);
-      camera.lookAt(new Vector3());
-
-      viewer.add(pco);
-    })
-    .catch(err => console.error(err));
-});
-
-const slider = document.createElement('input');
-slider.type = 'range';
-slider.min = String(10_000);
-slider.max = String(500_000);
-slider.className = 'budget-slider';
-
-slider.addEventListener('change', () => {
-  if (!pointCloud) {
-    return;
-  }
-
-  pointCloud.potree.pointBudget = parseInt(slider.value, 10);
-  console.log(pointCloud.potree.pointBudget);
-});
-
-const btnContainer = document.createElement('div');
-btnContainer.className = 'btn-container';
-document.body.appendChild(btnContainer);
-btnContainer.appendChild(unloadBtn);
-btnContainer.appendChild(loadBtn);
-btnContainer.appendChild(slider);

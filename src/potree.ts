@@ -29,6 +29,7 @@ import { BinaryHeap } from './utils/binary-heap';
 import { Box3Helper } from './utils/box3-helper';
 import { LRU } from './utils/lru';
 
+
 export class QueueItem {
   constructor(
     public pointCloudIndex: number,
@@ -47,12 +48,18 @@ export class Potree implements IPotree {
   features = FEATURES;
   lru = new LRU(this._pointBudget);
 
-  loadPointCloud(
+  async loadPointCloud( // Need to update IPotree if input / output args are modified
     url: string,
     getUrl: GetUrlFn,
     xhrRequest = (input: RequestInfo, init?: RequestInit) => fetch(input, init),
   ): Promise<PointCloudOctree> {
-    return loadPOC(url, getUrl, xhrRequest).then(geometry => new PointCloudOctree(this, geometry));
+    if (url === "cloud.js") {
+      return await loadPOC(url, getUrl, xhrRequest).then(geometry => new PointCloudOctree(this, geometry));
+    } else if (url === "metadata.json") {
+      throw new Error("Not implemented")
+      // return await 
+    }
+    throw new Error("Unsupported file type");
   }
 
   updatePointClouds(
