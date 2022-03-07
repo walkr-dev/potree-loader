@@ -1,4 +1,3 @@
-import { IPointCloudTreeNode, IPotree } from './../types';
 import { NodeLoader, Metadata } from './OctreeLoader';
 
 // import * as THREE from "../../../../libs/three.js/build/three.module.js";

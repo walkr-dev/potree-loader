@@ -1,3 +1,5 @@
+import { OctreeGeometry } from './loading2/OctreeGeometry';
+import { loadOctree } from './loading2/load-octree';
 import {
   Box3,
   Camera,
@@ -56,8 +58,8 @@ export class Potree implements IPotree {
     if (url === "cloud.js") {
       return await loadPOC(url, getUrl, xhrRequest).then(geometry => new PointCloudOctree(this, geometry));
     } else if (url === "metadata.json") {
-      throw new Error("Not implemented")
-      // return await 
+      // throw new Error("Not implemented")
+      return await loadOctree(url, getUrl, xhrRequest).then((geometry:OctreeGeometry) => new PointCloudOctree(this, geometry));
     }
     throw new Error("Unsupported file type");
   }

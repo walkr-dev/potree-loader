@@ -1,12 +1,10 @@
-
+import { XhrRequest } from './../loading/types';
 import { BufferAttribute, BufferGeometry, Vector3 } from "three";
 import {PointAttribute, PointAttributes, PointAttributeTypes} from "./PointAttributes";
-import {OctreeGeometry} from "./OctreeGeometry.js";
-import {OctreeGeometryNode} from "./OctreeGeometryNode.js";
 import { Box3, Sphere } from "three";
 import { WorkerPool, WorkerType } from "./WorkerPool";
-
-// let loadedNodes = new Set();
+import { OctreeGeometryNode } from './OctreeGeometryNode';
+import { OctreeGeometry } from './OctreeGeometry';
 
 export class NodeLoader{
 
@@ -351,7 +349,7 @@ export class OctreeLoader{
 		};
 
 		for (const jsonAttribute of jsonAttributes) {
-			let {name, description, size, numElements, min, max} = jsonAttribute;
+			let {name, numElements, min, max} = jsonAttribute;
 
 			let type = typenameTypeattributeMap[jsonAttribute.type]; // Fix the typing, currently jsonAttribute has type "never"
 
@@ -395,9 +393,9 @@ export class OctreeLoader{
 		return attributes;
 	}
 
-	async load(url:string){ // Previously a static method
+	async load(url:string, xhrRequest: XhrRequest){ // Previously a static method
 
-		let response = await fetch(url);
+		let response = await xhrRequest(url);
 		let metadata: Metadata = await response.json();
 
 		let attributes = OctreeLoader.parseAttributes(metadata.attributes);
