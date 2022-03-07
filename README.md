@@ -1,3 +1,5 @@
+<!-- Todo: New workers are probably not compiling correctly leading to errors. -->
+
 # README
 
 This project is based on the core/loading parts of [Potree](http://potree.org/), converted to Typescript for usage directly in ThreeJS-based third-party applications.
