@@ -48,7 +48,7 @@ export class Potree implements IPotree {
   features = FEATURES;
   lru = new LRU(this._pointBudget);
 
-  async loadPointCloud( // Need to update IPotree if input / output args are modified
+  async loadPointCloud(
     url: string,
     getUrl: GetUrlFn,
     xhrRequest = (input: RequestInfo, init?: RequestInit) => fetch(input, init),

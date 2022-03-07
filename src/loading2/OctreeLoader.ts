@@ -1,7 +1,8 @@
 
 import { BufferAttribute, BufferGeometry, Vector3 } from "three";
 import {PointAttribute, PointAttributes, PointAttributeTypes} from "./PointAttributes";
-import {OctreeGeometry, OctreeGeometryNode} from "./OctreeGeometry.js";
+import {OctreeGeometry} from "./OctreeGeometry.js";
+import {OctreeGeometryNode} from "./OctreeGeometryNode.js";
 import { Box3, Sphere } from "three";
 import { WorkerPool, WorkerType } from "./WorkerPool";
 
@@ -151,14 +152,13 @@ export class NodeLoader{
 	parseHierarchy(node:OctreeGeometryNode, buffer:ArrayBuffer){
 
 		let view = new DataView(buffer);
-		let tStart = performance.now();
 
 		let bytesPerNode = 22;
 		let numNodes = buffer.byteLength / bytesPerNode;
 
 		let octree = node.octreeGeometry;
 		// let nodes = [node];
-		let nodes = new Array(numNodes);
+		let nodes: OctreeGeometryNode[] = new Array(numNodes);
 		nodes[0] = node;
 		let nodePos = 1;
 
@@ -214,7 +214,7 @@ export class NodeLoader{
 				child.spacing = current.spacing / 2;
 				child.level = current.level + 1;
 
-				current.children[childIndex] = child;
+				(current.children as any)[childIndex] = child;
 				child.parent = current;
 
 				// nodes.push(child);
@@ -253,34 +253,9 @@ export class NodeLoader{
 			},
 		});
 
-
-
 		let buffer = await response.arrayBuffer();
 
 		this.parseHierarchy(node, buffer);
-
-		// let promise = new Promise((resolve) => {
-		// 	let generator = this.parseHierarchy(node, buffer);
-
-		// 	let repeatUntilDone = () => {
-		// 		let result = generator.next();
-
-		// 		if(result.done){
-		// 			resolve();
-		// 		}else{
-		// 			requestAnimationFrame(repeatUntilDone);
-		// 		}
-		// 	};
-			
-		// 	repeatUntilDone();
-		// });
-
-		// await promise;
-
-		
-
-
-
 	}
 
 }

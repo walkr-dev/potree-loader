@@ -153,7 +153,7 @@ export class PointCloudOctreeGeometryNode extends EventDispatcher implements IPo
       this.pcoGeometry.loader.version.equalOrHigher('1.5') &&
       this.level % this.pcoGeometry.hierarchyStepSize === 0 &&
       this.hasChildren
-    ) {
+    ) { 
       promise = this.loadHierachyThenPoints();
     } else {
       promise = this.loadPoints();

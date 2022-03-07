@@ -51,24 +51,23 @@ export function loadPOC(
   getUrl: GetUrlFn,
   xhrRequest: XhrRequest,
 ): Promise<PointCloudOctreeGeometry> {
-  return Promise.resolve(getUrl(url)).then(transformedUrl => {
+  return Promise.resolve(getUrl(url)).then(transformedUrl => { // 1. Make a request to the URL
     return xhrRequest(transformedUrl, { mode: 'cors' })
       .then(res => res.json())
-      .then(parse(transformedUrl, getUrl, xhrRequest));
+      .then(parse(transformedUrl, getUrl, xhrRequest)); // 2. Parse the response
   });
 }
 
 function parse(url: string, getUrl: GetUrlFn, xhrRequest: XhrRequest) {
-  return (data: POCJson): Promise<PointCloudOctreeGeometry> => {
+  return (data: POCJson): Promise<PointCloudOctreeGeometry> => { // Note: The response gets passed from loadPOC()
     const { offset, boundingBox, tightBoundingBox } = getBoundingBoxes(data);
-
     const loader = new BinaryLoader({
       getUrl,
       version: data.version,
       boundingBox,
       scale: data.scale,
       xhrRequest,
-    });
+    }); // 3. Create a BinaryLoader with the bounding box and scale
 
     const pco = new PointCloudOctreeGeometry(
       loader,
@@ -76,8 +75,9 @@ function parse(url: string, getUrl: GetUrlFn, xhrRequest: XhrRequest) {
       tightBoundingBox,
       offset,
       xhrRequest,
-    );
+    ); // 4. Create a PointCloudOctreeGeometry
 
+    // 5. Fill in Geometry with the data from the POCJson
     pco.url = url;
     pco.octreeDir = data.octreeDir;
     pco.needsUpdate = true;
@@ -86,12 +86,14 @@ function parse(url: string, getUrl: GetUrlFn, xhrRequest: XhrRequest) {
     pco.projection = data.projection;
     pco.offset = offset;
     pco.pointAttributes = new PointAttributes(data.pointAttributes);
+    
+    
 
-    const nodes: Record<string, PointCloudOctreeGeometryNode> = {};
+    const nodes: Record<string, PointCloudOctreeGeometryNode> = {}; // HMM! Juicy! 6. Create a map of nodes
 
     const version = new Version(data.version);
 
-    return loadRoot(pco, data, nodes, version).then(() => {
+    return loadRoot(pco, data, nodes, version).then(() => { // 7. Load the root node
       if (version.upTo('1.4')) {
         loadRemainingHierarchy(pco, data, nodes);
       }
@@ -136,7 +138,7 @@ function loadRoot(
 
   const root = new PointCloudOctreeGeometryNode(name, pco, pco.boundingBox);
   root.hasChildren = true;
-  root.spacing = pco.spacing;
+  root.spacing = pco.spacing; // Fill in root info from the POCJson
 
   if (version.upTo('1.5')) {
     root.numPoints = data.hierarchy[0][1];
