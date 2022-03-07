@@ -48,8 +48,8 @@ viewer
 
 viewer
 .load(
-  'metadata.json',
-  'http://localhost:8080/BigShotCleanV2/',
+  'cloud.js',
+  'http://localhost:8080/BigShotCleanV1/',
 )
 .then(pco => {
   pointCloud = pco;

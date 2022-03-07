@@ -1,13 +1,20 @@
 
 import { BufferAttribute, BufferGeometry, Vector3 } from "three";
 import {PointAttribute, PointAttributes, PointAttributeTypes} from "./PointAttributes";
-import {OctreeGeometry, OctreeGeometryNode, Box3, Sphere} from "./OctreeGeometry.js";
+import {OctreeGeometry, OctreeGeometryNode} from "./OctreeGeometry.js";
+import { Box3, Sphere } from "three";
+import { WorkerPool, WorkerType } from "./WorkerPool";
 
 // let loadedNodes = new Set();
 
 export class NodeLoader{
 
-	constructor(public url:string){
+	attributes?: PointAttributes;
+	scale?: [number, number, number];
+	offset?: [number, number, number];
+	
+
+	constructor(public url:string, public workerPool:WorkerPool, public metadata: Metadata){
 	}
 
 	async load(node: OctreeGeometryNode){
@@ -17,25 +24,28 @@ export class NodeLoader{
 		}
 
 		node.loading = true;
-		// Potree.numNodesLoading++;
 		// TODO: Need to put the numNodesLoading to the pco
+		node.octreeGeometry.numNodesLoading++;
 
 		try{
-			if(node.nodeType === 2){
+			if(node.nodeType === 2){ // TODO: Investigate
 				await this.loadHierarchy(node);
 			}
 
 			let {byteOffset, byteSize} = node;
-
+			
+			if (byteOffset === undefined || byteSize === undefined) {
+				throw new Error("byteOffset and byteSize are required");
+			}
 
 			let urlOctree = `${this.url}/../octree.bin`;
 
 			let first = byteOffset;
-			let last = byteOffset + byteSize - 1n;
+			let last = byteOffset + byteSize - BigInt(1);
 
 			let buffer;
 
-			if(byteSize === 0n){
+			if(byteSize === BigInt(0)){
 				buffer = new ArrayBuffer(0);
 				console.warn(`loaded node with 0 bytes: ${node.name}`);
 			}else{
@@ -49,21 +59,15 @@ export class NodeLoader{
 				buffer = await response.arrayBuffer();
 			}
 
-			let workerPath;
-			if(this.metadata.encoding === "BROTLI"){
-				workerPath = Potree.scriptPath + '/workers/2.0/DecoderWorker_brotli.js';
-			}else{
-				workerPath = Potree.scriptPath + '/workers/2.0/DecoderWorker.js';
-			}
+			const workerType = (this.metadata.encoding === "BROTLI") ? WorkerType.DECODER_WORKER_BROTLI : WorkerType.DECODER_WORKER;
+			const worker = this.workerPool.getWorker(workerType)
 
-			let worker = Potree.workerPool.getWorker(workerPath);
-
-			worker.onmessage = function (e) {
+			worker.onmessage = (e) => {
 
 				let data = e.data;
 				let buffers = data.attributeBuffers;
 
-				Potree.workerPool.returnWorker(workerPath, worker);
+				this.workerPool.returnWorker(workerType, worker);
 
 				let geometry = new BufferGeometry();
 				
@@ -83,7 +87,9 @@ export class NodeLoader{
 						bufferAttribute.normalized = true;
 						geometry.setAttribute('indices', bufferAttribute);
 					}else{
-						const bufferAttribute = new BufferAttribute(new Float32Array(buffer), 1);
+						const bufferAttribute: BufferAttribute & {
+							potree?: object
+						} = new BufferAttribute(new Float32Array(buffer), 1);
 
 						let batchAttribute = buffers[property].attribute;
 						bufferAttribute.potree = {
@@ -103,7 +109,8 @@ export class NodeLoader{
 				node.geometry = geometry;
 				node.loaded = true;
 				node.loading = false;
-				Potree.numNodesLoading--;
+				// Potree.numNodesLoading--;
+				node.octreeGeometry.numNodesLoading--;
 			};
 
 			let pointAttributes = node.octreeGeometry.pointAttributes;
@@ -133,7 +140,7 @@ export class NodeLoader{
 		}catch(e){
 			node.loaded = false;
 			node.loading = false;
-			Potree.numNodesLoading--;
+			node.octreeGeometry.numNodesLoading--;
 
 			console.log(`failed to load ${node.name}`);
 			console.log(e);
@@ -141,7 +148,7 @@ export class NodeLoader{
 		}
 	}
 
-	parseHierarchy(node, buffer){
+	parseHierarchy(node:OctreeGeometryNode, buffer:ArrayBuffer){
 
 		let view = new DataView(buffer);
 		let tStart = performance.now();
@@ -229,6 +236,11 @@ export class NodeLoader{
 	async loadHierarchy(node: OctreeGeometryNode){
 
 		let {hierarchyByteOffset, hierarchyByteSize} = node;
+
+		if (hierarchyByteOffset === undefined || hierarchyByteSize === undefined) {
+			throw new Error(`hierarchyByteOffset and hierarchyByteSize are undefined for node ${node.name}`);
+		}
+
 		let hierarchyPath = `${this.url}/../hierarchy.bin`;
 		
 		let first = hierarchyByteOffset;
@@ -273,7 +285,7 @@ export class NodeLoader{
 
 }
 
-let tmpVec3 = new THREE.Vector3();
+let tmpVec3 = new Vector3();
 function createChildAABB(aabb:Box3, index:number){
 	let min = aabb.min.clone();
 	let max = aabb.max.clone();
@@ -297,7 +309,7 @@ function createChildAABB(aabb:Box3, index:number){
 		max.x -= size.x / 2;
 	}
 
-	return new THREE.Box3(min, max);
+	return new Box3(min, max);
 }
 
 let typenameTypeattributeMap = {
@@ -313,20 +325,60 @@ let typenameTypeattributeMap = {
 	"uint64": PointAttributeTypes.DATA_TYPE_UINT64,
 }
 
+type AttributeType = keyof typeof typenameTypeattributeMap;
+
+export interface Attribute {
+	name: string;
+	description: string;
+	size: number;
+	numElements: number;
+	type: AttributeType;
+	min: number[];
+	max: number[];
+}
+
+export interface Metadata {
+	version: string;
+	name: string;
+	description: string;
+	points: number;
+	projection: string;
+	hierarchy: {
+		firstChunkSize: number;
+		stepSize: number;
+		depth: number;
+	},
+	offset: [number, number, number],
+	scale: [number, number, number],
+	spacing: number,
+	boundingBox: {
+		min: [number, number, number],
+		max: [number, number, number],
+	},
+	encoding: string;
+	attributes: Attribute[];
+}
+
 export class OctreeLoader{
 
-	static parseAttributes(jsonAttributes){
+	workerPool: WorkerPool = new WorkerPool();
+
+	constructor() {
+	}
+
+	static parseAttributes(jsonAttributes:Attribute[]){
 
 		let attributes = new PointAttributes();
 
-		let replacements = {
+		// Replacements object for string to string
+		let replacements: {[key: string]: string} = {
 			"rgb": "rgba",
 		};
 
 		for (const jsonAttribute of jsonAttributes) {
-			let {name, description, size, numElements, elementSize, min, max} = jsonAttribute;
+			let {name, description, size, numElements, min, max} = jsonAttribute;
 
-			let type = typenameTypeattributeMap[jsonAttribute.type];
+			let type = typenameTypeattributeMap[jsonAttribute.type]; // Fix the typing, currently jsonAttribute has type "never"
 
 			let potreeAttributeName = replacements[name] ? replacements[name] : name;
 
@@ -339,7 +391,7 @@ export class OctreeLoader{
 			}
 
 			if (name === "gps-time") { // HACK: Guard against bad gpsTime range in metadata, see potree/potree#909
-				if (attribute.range[0] === attribute.range[1]) {
+				if (typeof attribute.range[0] === "number" && attribute.range[0] === attribute.range[1]) {
 					attribute.range[1] += 1;
 				}
 			}
@@ -368,26 +420,22 @@ export class OctreeLoader{
 		return attributes;
 	}
 
-	static async load(url:string){
+	async load(url:string){ // Previously a static method
 
 		let response = await fetch(url);
-		let metadata = await response.json();
+		let metadata: Metadata = await response.json();
 
 		let attributes = OctreeLoader.parseAttributes(metadata.attributes);
 
-		let loader = new NodeLoader(url);
-		loader.metadata = metadata;
+		let loader = new NodeLoader(url, this.workerPool, metadata);
 		loader.attributes = attributes;
 		loader.scale = metadata.scale;
 		loader.offset = metadata.offset;
 
-		let octree = new OctreeGeometry();
+		let octree = new OctreeGeometry(loader, new Box3(new Vector3(...metadata.boundingBox.min), new Vector3(...metadata.boundingBox.max)));
 		octree.url = url;
 		octree.spacing = metadata.spacing;
 		octree.scale = metadata.scale;
-
-		// let aPosition = metadata.attributes.find(a => a.name === "position");
-		// octree
 
 		let min = new Vector3(...metadata.boundingBox.min);
 		let max = new Vector3(...metadata.boundingBox.max);
@@ -404,16 +452,14 @@ export class OctreeLoader{
 		octree.tightBoundingSphere = boundingBox.getBoundingSphere(new Sphere());
 		octree.offset = offset;
 		octree.pointAttributes = OctreeLoader.parseAttributes(metadata.attributes);
-		octree.loader = loader;
 
 		let root = new OctreeGeometryNode("r", octree, boundingBox);
 		root.level = 0;
 		root.nodeType = 2;
 		root.hierarchyByteOffset = BigInt(0);
 		root.hierarchyByteSize = BigInt(metadata.hierarchy.firstChunkSize);
-		root.hasChildren = false;
 		root.spacing = octree.spacing;
-		root.byteOffset = 0;
+		root.byteOffset = BigInt(0); // Originally 0
 
 		octree.root = root;
 

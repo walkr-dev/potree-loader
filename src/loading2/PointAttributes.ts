@@ -34,20 +34,22 @@ for (let obj in PointAttributeTypes) {
 
 export {PointAttributeTypes};
 
+type RangeType = number[] | [number[], number[]]
+
 // Class that represents a certain point attribute
 class PointAttribute{
-	byteSize:number;
-	description:string;
-	range:number[];
+	byteSize: number;
+	description: string;
+	public initialRange?: RangeType
 
 	constructor(
 		public name:string,
 		public type:PointAttributeTypeType,
 		public numElements:number,
+		public range: RangeType = [Infinity, -Infinity]
 	){
 		this.byteSize = this.numElements * this.type.size;
 		this.description = "";
-		this.range = [Infinity, -Infinity];
 	}
 };
 
@@ -84,7 +86,7 @@ export class PointAttributes{
 
 
 	// pointAttributes will be a list of strings
-	constructor(pointAttributes:string[],
+	constructor(pointAttributes?:string[],
 				public attributes:PointAttribute[] = [],
 				public byteSize:number = 0,
 				public size:number = 0,

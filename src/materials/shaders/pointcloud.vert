@@ -101,7 +101,7 @@ varying vec3 vColor;
 #ifdef highlight_point
 	varying float vHighlight;
 #endif
-
+ 
 // ---------------------
 // OCTREE
 // ---------------------

@@ -1,3 +1,4 @@
+import { OctreeGeometry } from './loading2/OctreeGeometry';
 import { Box3, Camera, Object3D, Points, Ray, Sphere, Vector3, WebGLRenderer } from 'three';
 import { DEFAULT_MIN_NODE_PIXEL_SIZE } from './constants';
 import { PointCloudMaterial, PointSizeType } from './materials';
@@ -12,7 +13,7 @@ import { computeTransformedBoundingBox } from './utils/bounds';
 export class PointCloudOctree extends PointCloudTree {
   potree: IPotree;
   disposed: boolean = false;
-  pcoGeometry: PointCloudOctreeGeometry;
+  pcoGeometry: PointCloudOctreeGeometry | OctreeGeometry;
   boundingBox: Box3;
   boundingSphere: Sphere;
   material: PointCloudMaterial;
@@ -33,7 +34,7 @@ export class PointCloudOctree extends PointCloudTree {
 
   constructor(
     potree: IPotree,
-    pcoGeometry: PointCloudOctreeGeometry,
+    pcoGeometry: PointCloudOctreeGeometry | OctreeGeometry,
     material?: PointCloudMaterial,
   ) {
     super();
@@ -139,6 +140,7 @@ export class PointCloudOctree extends PointCloudTree {
     if (!this.showBoundingBox || !this.parent) {
       return;
     }
+    // Above: If we're not showing the bounding box or we don't have a parent, we can't update it.
 
     let bbRoot: any = this.parent.getObjectByName('bbroot');
     if (!bbRoot) {
@@ -146,6 +148,7 @@ export class PointCloudOctree extends PointCloudTree {
       bbRoot.name = 'bbroot';
       this.parent.add(bbRoot);
     }
+    // Above: If we don't have a root object, we need to create one.
 
     const visibleBoxes: (Object3D | null)[] = [];
     for (const node of this.visibleNodes) {
