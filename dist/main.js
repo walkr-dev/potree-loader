@@ -22,66 +22,16 @@ function $parcel$export(e, n, v, s) {
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
-var $parcel$global =
-typeof globalThis !== 'undefined'
-  ? globalThis
-  : typeof self !== 'undefined'
-  ? self
-  : typeof window !== 'undefined'
-  ? window
-  : typeof global !== 'undefined'
-  ? global
-  : {};
-var $parcel$modules = {};
-var $parcel$inits = {};
-
-var parcelRequire = $parcel$global["parcelRequirefa99"];
-if (parcelRequire == null) {
-  parcelRequire = function(id) {
-    if (id in $parcel$modules) {
-      return $parcel$modules[id].exports;
-    }
-    if (id in $parcel$inits) {
-      var init = $parcel$inits[id];
-      delete $parcel$inits[id];
-      var module = {id: id, exports: {}};
-      $parcel$modules[id] = module;
-      init.call(module.exports, module, module.exports);
-      return module.exports;
-    }
-    var err = new Error("Cannot find module '" + id + "'");
-    err.code = 'MODULE_NOT_FOUND';
-    throw err;
-  };
-
-  parcelRequire.register = function register(id, init) {
-    $parcel$inits[id] = init;
-  };
-
-  $parcel$global["parcelRequirefa99"] = parcelRequire;
-}
-parcelRequire.register("gqoqX", function(module, exports) {
-module.exports = "precision highp float;\nprecision highp int;\n#define GLSLIFY 1\n\nattribute vec3 position;\nattribute vec2 uv;\n\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\n\nvarying vec2 vUv;\n\nvoid main() {\n    vUv = uv;\n\n    gl_Position =   projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}";
-
-});
-
-parcelRequire.register("cpnKF", function(module, exports) {
-module.exports = "precision highp float;\nprecision highp int;\n#define GLSLIFY 1\n\nuniform mat4 projectionMatrix;\n\nuniform float screenWidth;\nuniform float screenHeight;\n\nuniform sampler2D map;\n\nvarying vec2 vUv;\n\nvoid main() {\n\n\tfloat dx = 1.0 / screenWidth;\n\tfloat dy = 1.0 / screenHeight;\n\n\tvec3 color = vec3(0.0, 0.0, 0.0);\n\tcolor += texture2D(map, vUv + vec2(-dx, -dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(  0, -dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(+dx, -dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(-dx,   0)).rgb;\n\tcolor += texture2D(map, vUv + vec2(  0,   0)).rgb;\n\tcolor += texture2D(map, vUv + vec2(+dx,   0)).rgb;\n\tcolor += texture2D(map, vUv + vec2(-dx,  dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(  0,  dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(+dx,  dy)).rgb;\n    \n\tcolor = color / 9.0;\n\t\n\tgl_FragColor = vec4(color, 1.0);\n\t\n\t\n}";
-
-});
-
 var $557504169a741f16$exports = {};
 var $658863318bd8218b$exports = {};
 
 $parcel$export($658863318bd8218b$exports, "BlurMaterial", () => $658863318bd8218b$export$ec8ead0ea9fedf30);
 
-
-
 class $658863318bd8218b$export$ec8ead0ea9fedf30 extends $8zHUo$three.ShaderMaterial {
     constructor(){
         super(...arguments);
-        this.vertexShader = (parcelRequire("gqoqX"));
-        this.fragmentShader = (parcelRequire("cpnKF"));
+        // vertexShader = require('./shaders/blur.vert');
+        // fragmentShader = require('./shaders/blur.frag');
         this.uniforms = {
             screenWidth: {
                 type: 'f',
@@ -3356,6 +3306,7 @@ class $37a47fc32ca3fd53$export$a7e9de55738dd76b {
             const inverseWorldMatrix = new $8zHUo$three.Matrix4();
             const cameraMatrix = new $8zHUo$three.Matrix4();
             return (pointClouds, camera)=>{
+                var _a;
                 const frustums = [];
                 const cameraPositions = [];
                 const priorityQueue = new $7a7dc1b55afe296b$export$57b2ff8762b0a409((x)=>1 / x.weight
@@ -3381,7 +3332,7 @@ class $37a47fc32ca3fd53$export$a7e9de55738dd76b {
                         priorityQueue.push(new $37a47fc32ca3fd53$export$1b63de307530e1bc(i, weight, pointCloud.root));
                     }
                     // Hide any previously visible nodes. We will later show only the needed ones.
-                    if ($1f134130629f1476$export$1c189858aa1437d7(pointCloud.root)) pointCloud.hideDescendants(pointCloud.root.sceneNode);
+                    if ($1f134130629f1476$export$1c189858aa1437d7(pointCloud.root)) pointCloud.hideDescendants((_a = pointCloud === null || pointCloud === void 0 ? void 0 : pointCloud.root) === null || _a === void 0 ? void 0 : _a.sceneNode);
                     for (const boundingBoxNode of pointCloud.boundingBoxNodes)boundingBoxNode.visible = false;
                 }
                 return {
@@ -3552,17 +3503,17 @@ var $852a6a12b2d91cbb$exports = {};
 
 
 
+$parcel$exportWildcard(module.exports, $7f9a1a3d4880a35c$exports);
+$parcel$exportWildcard(module.exports, $37a47fc32ca3fd53$exports);
+$parcel$exportWildcard(module.exports, $852a6a12b2d91cbb$exports);
+$parcel$exportWildcard(module.exports, $b52b3b6c1dfffcbd$exports);
+$parcel$exportWildcard(module.exports, $1eed64d9f2c3ee8d$exports);
 $parcel$exportWildcard(module.exports, $557504169a741f16$exports);
 $parcel$exportWildcard(module.exports, $7d3b645c538f377b$exports);
 $parcel$exportWildcard(module.exports, $36ea1d11336aa34a$exports);
 $parcel$exportWildcard(module.exports, $6975323efa039e06$exports);
 $parcel$exportWildcard(module.exports, $f3ed21d8a56dbd2a$exports);
-$parcel$exportWildcard(module.exports, $7f9a1a3d4880a35c$exports);
-$parcel$exportWildcard(module.exports, $1eed64d9f2c3ee8d$exports);
 $parcel$exportWildcard(module.exports, $7d1bc527283a94b5$exports);
-$parcel$exportWildcard(module.exports, $37a47fc32ca3fd53$exports);
-$parcel$exportWildcard(module.exports, $852a6a12b2d91cbb$exports);
-$parcel$exportWildcard(module.exports, $b52b3b6c1dfffcbd$exports);
 
 
 //# sourceMappingURL=main.js.map

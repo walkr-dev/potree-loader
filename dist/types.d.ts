@@ -15,8 +15,6 @@ export interface IBlurMaterialUniforms {
     map: IUniform<Texture | null>;
 }
 export class BlurMaterial extends ShaderMaterial {
-    vertexShader: any;
-    fragmentShader: any;
     uniforms: IBlurMaterialUniforms;
 }
 export enum ClipMode {

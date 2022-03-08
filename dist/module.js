@@ -22,66 +22,16 @@ function $parcel$export(e, n, v, s) {
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
-var $parcel$global =
-typeof globalThis !== 'undefined'
-  ? globalThis
-  : typeof self !== 'undefined'
-  ? self
-  : typeof window !== 'undefined'
-  ? window
-  : typeof global !== 'undefined'
-  ? global
-  : {};
-var $parcel$modules = {};
-var $parcel$inits = {};
-
-var parcelRequire = $parcel$global["parcelRequirefa99"];
-if (parcelRequire == null) {
-  parcelRequire = function(id) {
-    if (id in $parcel$modules) {
-      return $parcel$modules[id].exports;
-    }
-    if (id in $parcel$inits) {
-      var init = $parcel$inits[id];
-      delete $parcel$inits[id];
-      var module = {id: id, exports: {}};
-      $parcel$modules[id] = module;
-      init.call(module.exports, module, module.exports);
-      return module.exports;
-    }
-    var err = new Error("Cannot find module '" + id + "'");
-    err.code = 'MODULE_NOT_FOUND';
-    throw err;
-  };
-
-  parcelRequire.register = function register(id, init) {
-    $parcel$inits[id] = init;
-  };
-
-  $parcel$global["parcelRequirefa99"] = parcelRequire;
-}
-parcelRequire.register("3xD1Z", function(module, exports) {
-module.exports = "precision highp float;\nprecision highp int;\n#define GLSLIFY 1\n\nattribute vec3 position;\nattribute vec2 uv;\n\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\n\nvarying vec2 vUv;\n\nvoid main() {\n    vUv = uv;\n\n    gl_Position =   projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}";
-
-});
-
-parcelRequire.register("1SAI9", function(module, exports) {
-module.exports = "precision highp float;\nprecision highp int;\n#define GLSLIFY 1\n\nuniform mat4 projectionMatrix;\n\nuniform float screenWidth;\nuniform float screenHeight;\n\nuniform sampler2D map;\n\nvarying vec2 vUv;\n\nvoid main() {\n\n\tfloat dx = 1.0 / screenWidth;\n\tfloat dy = 1.0 / screenHeight;\n\n\tvec3 color = vec3(0.0, 0.0, 0.0);\n\tcolor += texture2D(map, vUv + vec2(-dx, -dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(  0, -dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(+dx, -dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(-dx,   0)).rgb;\n\tcolor += texture2D(map, vUv + vec2(  0,   0)).rgb;\n\tcolor += texture2D(map, vUv + vec2(+dx,   0)).rgb;\n\tcolor += texture2D(map, vUv + vec2(-dx,  dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(  0,  dy)).rgb;\n\tcolor += texture2D(map, vUv + vec2(+dx,  dy)).rgb;\n    \n\tcolor = color / 9.0;\n\t\n\tgl_FragColor = vec4(color, 1.0);\n\t\n\t\n}";
-
-});
-
 var $ddbabd1d335f84a9$exports = {};
 var $886301ae952e8f57$exports = {};
 
 $parcel$export($886301ae952e8f57$exports, "BlurMaterial", () => $886301ae952e8f57$export$ec8ead0ea9fedf30);
 
-
-
 class $886301ae952e8f57$export$ec8ead0ea9fedf30 extends $hgUW1$ShaderMaterial {
     constructor(){
         super(...arguments);
-        this.vertexShader = (parcelRequire("3xD1Z"));
-        this.fragmentShader = (parcelRequire("1SAI9"));
+        // vertexShader = require('./shaders/blur.vert');
+        // fragmentShader = require('./shaders/blur.frag');
         this.uniforms = {
             screenWidth: {
                 type: 'f',
@@ -3356,6 +3306,7 @@ class $f7a27d90ab1a4cd4$export$a7e9de55738dd76b {
             const inverseWorldMatrix = new $hgUW1$Matrix4();
             const cameraMatrix = new $hgUW1$Matrix4();
             return (pointClouds, camera)=>{
+                var _a;
                 const frustums = [];
                 const cameraPositions = [];
                 const priorityQueue = new $4b58d93c13807bb3$export$57b2ff8762b0a409((x)=>1 / x.weight
@@ -3381,7 +3332,7 @@ class $f7a27d90ab1a4cd4$export$a7e9de55738dd76b {
                         priorityQueue.push(new $f7a27d90ab1a4cd4$export$1b63de307530e1bc(i, weight, pointCloud.root));
                     }
                     // Hide any previously visible nodes. We will later show only the needed ones.
-                    if ($9278bbcc8bc95054$export$1c189858aa1437d7(pointCloud.root)) pointCloud.hideDescendants(pointCloud.root.sceneNode);
+                    if ($9278bbcc8bc95054$export$1c189858aa1437d7(pointCloud.root)) pointCloud.hideDescendants((_a = pointCloud === null || pointCloud === void 0 ? void 0 : pointCloud.root) === null || _a === void 0 ? void 0 : _a.sceneNode);
                     for (const boundingBoxNode of pointCloud.boundingBoxNodes)boundingBoxNode.visible = false;
                 }
                 return {
@@ -3554,5 +3505,5 @@ var $633d133e959bcfd9$exports = {};
 
 
 
-export {$886301ae952e8f57$export$ec8ead0ea9fedf30 as BlurMaterial, $7b3263892bf52898$export$e04e7431702ec10a as ClipMode, $5e4fff88bfda53ee$export$d1cbf822ea081fee as PointSizeType, $5e4fff88bfda53ee$export$5ffaab227f4e4906 as PointShape, $5e4fff88bfda53ee$export$eaf124a76310c668 as TreeType, $5e4fff88bfda53ee$export$b3da46a9b4c877b5 as PointOpacityType, $5e4fff88bfda53ee$export$e95c0b95a8f50828 as PointColorType, $104fbfc219aa06c4$export$29121d9ccd2f757a as PointCloudMaterial, $104fbfc219aa06c4$exports as default, $3fa0b589b7342ac5$export$1e96beb2edc20271 as generateDataTexture, $3fa0b589b7342ac5$export$fdceb370ef27f1c7 as generateGradientTexture, $3fa0b589b7342ac5$export$20a331fc7ad618b2 as generateClassificationTexture, $e9094b64304453a9$export$795f08762ba1b68c as GRAYSCALE, $de7fe8deb64de9a4$export$26ffe1805c7bf718 as INFERNO, $b45e8c3ed76e3d5b$export$6c89e34c5e9ab660 as PLASMA, $4982ed7e4b958d27$export$fc43e6ea480ea76f as RAINBOW, $855161ee86562854$export$8beb2468e5d7f653 as SPECTRAL, $874a1d158524c990$export$d793f114aad17738 as VIRIDIS, $2dd88a2a4c2e9932$export$c97e84e6a442ddd4 as YELLOW_GREEN, $6917a634b1124b58$export$718faa7d6d01aabc as PointAttributeName, $6917a634b1124b58$export$f447a8ca794d62f1 as POINT_ATTRIBUTE_TYPES, $6917a634b1124b58$export$c9c943992b7ca9cc as POINT_ATTRIBUTES, $6917a634b1124b58$export$33a55c29cc28473e as PointAttributes, $2c1acd357a20f870$export$fdc7d6e1ad096869 as PointCloudOctreeGeometryNode, $57aef60af449f0bf$export$bbcd90498494c738 as PointCloudOctreeGeometry, $5b22ec763ed6bfa5$export$ac5505afea26905b as PointCloudOctreeNode, $deb88b7421585e89$export$852cc38ee6d1f105 as PointCloudOctreePicker, $262d91a572d1a9aa$export$9ad96d5c091c935a as PointCloudOctree, $c5e6e5ed2f67ba3c$export$9dd4354534a21f56 as PointCloudTree, $f7a27d90ab1a4cd4$export$1b63de307530e1bc as QueueItem, $f7a27d90ab1a4cd4$export$a7e9de55738dd76b as Potree, $f7a27d90ab1a4cd4$exports as default, $b106f1b8d97b363d$export$682c179f50ab847d as Version};
+export {$deb88b7421585e89$export$852cc38ee6d1f105 as PointCloudOctreePicker, $f7a27d90ab1a4cd4$export$1b63de307530e1bc as QueueItem, $f7a27d90ab1a4cd4$export$a7e9de55738dd76b as Potree, $f7a27d90ab1a4cd4$exports as default, $b106f1b8d97b363d$export$682c179f50ab847d as Version, $262d91a572d1a9aa$export$9ad96d5c091c935a as PointCloudOctree, $886301ae952e8f57$export$ec8ead0ea9fedf30 as BlurMaterial, $7b3263892bf52898$export$e04e7431702ec10a as ClipMode, $5e4fff88bfda53ee$export$d1cbf822ea081fee as PointSizeType, $5e4fff88bfda53ee$export$5ffaab227f4e4906 as PointShape, $5e4fff88bfda53ee$export$eaf124a76310c668 as TreeType, $5e4fff88bfda53ee$export$b3da46a9b4c877b5 as PointOpacityType, $5e4fff88bfda53ee$export$e95c0b95a8f50828 as PointColorType, $104fbfc219aa06c4$export$29121d9ccd2f757a as PointCloudMaterial, $104fbfc219aa06c4$exports as default, $3fa0b589b7342ac5$export$1e96beb2edc20271 as generateDataTexture, $3fa0b589b7342ac5$export$fdceb370ef27f1c7 as generateGradientTexture, $3fa0b589b7342ac5$export$20a331fc7ad618b2 as generateClassificationTexture, $e9094b64304453a9$export$795f08762ba1b68c as GRAYSCALE, $de7fe8deb64de9a4$export$26ffe1805c7bf718 as INFERNO, $b45e8c3ed76e3d5b$export$6c89e34c5e9ab660 as PLASMA, $4982ed7e4b958d27$export$fc43e6ea480ea76f as RAINBOW, $855161ee86562854$export$8beb2468e5d7f653 as SPECTRAL, $874a1d158524c990$export$d793f114aad17738 as VIRIDIS, $2dd88a2a4c2e9932$export$c97e84e6a442ddd4 as YELLOW_GREEN, $6917a634b1124b58$export$718faa7d6d01aabc as PointAttributeName, $6917a634b1124b58$export$f447a8ca794d62f1 as POINT_ATTRIBUTE_TYPES, $6917a634b1124b58$export$c9c943992b7ca9cc as POINT_ATTRIBUTES, $6917a634b1124b58$export$33a55c29cc28473e as PointAttributes, $2c1acd357a20f870$export$fdc7d6e1ad096869 as PointCloudOctreeGeometryNode, $57aef60af449f0bf$export$bbcd90498494c738 as PointCloudOctreeGeometry, $5b22ec763ed6bfa5$export$ac5505afea26905b as PointCloudOctreeNode, $c5e6e5ed2f67ba3c$export$9dd4354534a21f56 as PointCloudTree};
 //# sourceMappingURL=module.js.map
