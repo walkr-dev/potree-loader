@@ -11,8 +11,8 @@ export interface IBlurMaterialUniforms {
 }
 
 export class BlurMaterial extends ShaderMaterial {
-  vertexShader = require('./shaders/blur.vert');
-  fragmentShader = require('./shaders/blur.frag');
+  // vertexShader = require('./shaders/blur.vert');
+  // fragmentShader = require('./shaders/blur.frag');
   uniforms: IBlurMaterialUniforms = {
     screenWidth: { type: 'f', value: 0 },
     screenHeight: { type: 'f', value: 0 },

@@ -19,7 +19,7 @@ const pointClouds: PointCloudOctree[] = [];
 potree
   .loadPointCloud(
     // The name of the point cloud which is to be loaded.
-    'cloud.js',
+    'metadata.json',
     // Given the relative URL of a file, should return a full URL (e.g. signed).
     relativeUrl => `${baseUrl}${relativeUrl}`,
   )

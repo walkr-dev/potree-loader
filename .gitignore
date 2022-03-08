@@ -17,4 +17,3 @@ node_modules
 yarn-error.log
 size-plugin.json
 .parcel-cache
-dist
