@@ -1,11 +1,11 @@
 {
-  "compileOnSave": false,
+  // "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src/",
     "sourceMap": true,
     "declaration": true,
     "declarationDir": "build/declarations",
-    "module": "es2015",
+    "module": "es2020",
     "moduleResolution": "node",
     "strict": true,
     "noImplicitAny": true,
@@ -17,7 +17,7 @@
     "target": "es6",
     "experimentalDecorators": true,
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
+    "lib": ["es2020", "dom"],
     "plugins": []
   },
   "include": ["src/**/*.ts"],

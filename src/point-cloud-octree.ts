@@ -1,3 +1,4 @@
+import { OctreeGeometry } from './loading2/OctreeGeometry';
 import { Box3, Camera, Object3D, Points, Ray, Sphere, Vector3, WebGLRenderer } from 'three';
 import { DEFAULT_MIN_NODE_PIXEL_SIZE } from './constants';
 import { PointCloudMaterial, PointSizeType } from './materials';
@@ -47,7 +48,7 @@ export class PointCloudOctree extends PointCloudTree {
     this.position.copy(pcoGeometry.offset);
     this.updateMatrix();
 
-    this.material = material || new PointCloudMaterial();
+    this.material = material || (pcoGeometry instanceof OctreeGeometry) ? new PointCloudMaterial({newFormat: true}) : new PointCloudMaterial();
     this.initMaterial(this.material);
   }
 
@@ -97,7 +98,6 @@ export class PointCloudOctree extends PointCloudTree {
     parent?: PointCloudOctreeNode | null,
   ): PointCloudOctreeNode {
     const points = new Points(geometryNode.geometry, this.material);
-    console.log(points)
     const node = new PointCloudOctreeNode(geometryNode, points);
     points.name = geometryNode.name;
     points.position.copy(geometryNode.boundingBox.min);

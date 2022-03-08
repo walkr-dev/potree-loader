@@ -16,6 +16,8 @@ import {
   WebGLRenderer,
   WebGLRenderTarget,
 } from 'three';
+import VertShader from "./shaders/pointcloud.vert"
+import FragShader from './shaders/pointcloud.frag';
 import {
   DEFAULT_HIGHLIGHT_COLOR,
   DEFAULT_MAX_POINT_SIZE,
@@ -44,6 +46,7 @@ export interface IPointCloudMaterialParameters {
   minSize: number;
   maxSize: number;
   treeType: TreeType;
+  newFormat: boolean;
 }
 
 export interface IPointCloudMaterialUniforms {
@@ -268,6 +271,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
     pointSourceID: { type: 'f', value: [] },
     indices: { type: 'fv', value: [] },
   };
+  newFormat: boolean;
 
   constructor(parameters: Partial<IPointCloudMaterialParameters> = {}) {
     super();
@@ -282,6 +286,8 @@ export class PointCloudMaterial extends RawShaderMaterial {
     this.minSize = getValid(parameters.minSize, 2.0);
     this.maxSize = getValid(parameters.maxSize, 50.0);
 
+    this.newFormat = !!parameters.newFormat;
+
     this.classification = DEFAULT_CLASSIFICATION;
 
     this.defaultAttributeValues.normal = [0, 0, 0];
@@ -289,6 +295,8 @@ export class PointCloudMaterial extends RawShaderMaterial {
     this.defaultAttributeValues.indices = [0, 0, 0, 0];
 
     this.vertexColors = true;
+    // throw new Error('Not implemented');
+    // this.extensions.fragDepth = true;
 
     this.updateShaderSource();
   }
@@ -324,8 +332,8 @@ export class PointCloudMaterial extends RawShaderMaterial {
   }
 
   updateShaderSource(): void {
-    this.vertexShader = this.applyDefines(require('./shaders/pointcloud.vert').default);
-    this.fragmentShader = this.applyDefines(require('./shaders/pointcloud.frag').default);
+    this.vertexShader = this.applyDefines(VertShader);
+    this.fragmentShader = this.applyDefines(FragShader);
 
     if (this.opacity === 1.0) {
       this.blending = NoBlending;
@@ -399,8 +407,18 @@ export class PointCloudMaterial extends RawShaderMaterial {
     define('MAX_POINT_LIGHTS 0');
     define('MAX_DIR_LIGHTS 0');
 
-    parts.push(shaderSrc);
+    if (this.newFormat) {
+      define ('new_format')
+    }
 
+
+    // If "#version 300 es" exists as a line in shaderSrc, remove it and add it as the first element in the parts array
+    const versionLine = shaderSrc.match(/^\s*#version\s+300\s+es\s*\n/);
+    if (versionLine) {
+      parts.unshift(versionLine[0]);
+      shaderSrc = shaderSrc.replace(versionLine[0], '');
+    }
+    parts.push(shaderSrc);
     return parts.join('\n');
   }
 

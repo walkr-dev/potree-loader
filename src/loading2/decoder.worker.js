@@ -2,7 +2,7 @@
 
 import {PointAttribute, PointAttributeTypes} from "./PointAttributes";
 
-typedArrayMapping = { // Not sure why if this is declared with const, it doesn't compile
+const typedArrayMapping = {
 	"int8":   Int8Array,
 	"int16":  Int16Array,
 	"int32":  Int32Array,
@@ -218,6 +218,7 @@ onmessage = function (event) {
 		transferables.push(message.attributeBuffers[property].buffer);
 	}
 	transferables.push(buffer);
+	// console.log("new", message)
 
 	postMessage(message, transferables);
 };

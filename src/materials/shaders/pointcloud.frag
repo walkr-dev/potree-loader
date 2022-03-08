@@ -1,9 +1,7 @@
+#version 300 es
+
 precision highp float;
 precision highp int;
-
-#if defined paraboloid_point_shape
-	#extension GL_EXT_frag_depth : enable
-#endif
 
 uniform mat4 viewMatrix;
 uniform vec3 cameraPosition;
@@ -21,44 +19,59 @@ uniform float screenHeight;
 
 uniform sampler2D depthMap;
 
+out vec4 fragColor;
+
 #ifdef highlight_point
 	uniform vec4 highlightedPointColor;
 #endif
 
-varying vec3 vColor;
+#ifdef new_format
+	in vec4 vColor;
+#else
+	in vec3 vColor;
+#endif
 
 #if !defined(color_type_point_index)
-	varying float vOpacity;
+	in float vOpacity;
 #endif
 
 #if defined(weighted_splats)
-	varying float vLinearDepth;
+	in float vLinearDepth;
 #endif
 
 #if !defined(paraboloid_point_shape) && defined(use_edl)
-	varying float vLogDepth;
+	in float vLogDepth;
 #endif
 
 #if defined(color_type_phong) && (MAX_POINT_LIGHTS > 0 || MAX_DIR_LIGHTS > 0) || defined(paraboloid_point_shape)
-	varying vec3 vViewPosition;
+	in vec3 vViewPosition;
 #endif
 
 #if defined(weighted_splats) || defined(paraboloid_point_shape)
-	varying float vRadius;
+	in float vRadius;
 #endif
 
 #if defined(color_type_phong) && (MAX_POINT_LIGHTS > 0 || MAX_DIR_LIGHTS > 0)
-	varying vec3 vNormal;
+	in vec3 vNormal;
 #endif
 
 #ifdef highlight_point
-	varying float vHighlight;
+	in float vHighlight;
 #endif
 
 float specularStrength = 1.0;
 
 void main() {
-	vec3 color = vColor;
+
+	#ifdef new_format
+		// set actualColor vec3 from vec4 vColor
+		vec3 actualColor = vColor.xyz;
+	#else
+		// set actualColor RGB from the XYZ of vColor
+		vec3 actualColor = vColor;
+	#endif
+	
+	vec3 color = actualColor;
 	float depth = gl_FragCoord.z;
 
 	#if defined(circle_point_shape) || defined(paraboloid_point_shape) || defined (weighted_splats)
@@ -82,9 +95,9 @@ void main() {
 	#endif
 		
 	#if defined color_type_point_index
-		gl_FragColor = vec4(color, pcIndex / 255.0);
+		fragColor = vec4(color, pcIndex / 255.0);
 	#else
-		gl_FragColor = vec4(color, vOpacity);
+		fragColor = vec4(color, vOpacity);
 	#endif
 
 	#if defined(color_type_phong)
@@ -233,7 +246,7 @@ void main() {
 		pos = pos / pos.w;
 		float expDepth = pos.z;
 		depth = (pos.z + 1.0) / 2.0;
-		gl_FragDepthEXT = depth;
+		gl_FragDepth = depth;
 		
 		#if defined(color_type_depth)
 			gl_FragColor.r = linearDepth;

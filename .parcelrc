@@ -1,0 +1,6 @@
+{
+    "extends": "@parcel/config-default",
+    "transformers": {
+      "*.{ts,tsx}": ["@parcel/transformer-typescript-tsc"] // https://github.com/swc-project/swc/issues/1592: SWC can't compile decorators correctly; the original webpack confiuguration also does not compile it correctly. So I got lazy.
+    }
+}

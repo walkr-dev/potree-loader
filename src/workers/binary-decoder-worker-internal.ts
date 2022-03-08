@@ -82,6 +82,7 @@ export function handleMessage(event: MessageEvent) {
     indices,
   };
 
+  // console.log("old", message)
   postMessage(message, ctx.transferables as any);
 }
 

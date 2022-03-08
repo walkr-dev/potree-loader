@@ -399,6 +399,7 @@ export class OctreeLoader{
 		let metadata: Metadata = await response.json();
 
 		let attributes = OctreeLoader.parseAttributes(metadata.attributes);
+		console.log(attributes)
 
 		let loader = new NodeLoader(url, this.workerPool, metadata);
 		loader.attributes = attributes;

@@ -165,9 +165,11 @@ export class BinaryLoader {
     if (worker) {
       return worker;
     }
-    const ctor = require('../workers/binary-decoder.worker.js');
 
-    return new ctor();
+    return new Worker(
+      new URL('../workers/binary-decoder.worker.js', import.meta.url),
+      { type: 'module' },
+    )
   }
 
   private releaseWorker(worker: Worker): void {

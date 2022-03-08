@@ -1,4 +1,4 @@
-import { IPointCloudTreeNode, IPotree } from './../types';
+import { IPointCloudTreeNode } from './../types';
 
 // import * as THREE from "../../../../libs/three.js/build/three.module.js";
 import { Box3,Sphere } from "three";
@@ -10,7 +10,6 @@ export class OctreeGeometryNode implements IPointCloudTreeNode{
 		this.id = OctreeGeometryNode.IDCount++;
 		this.index = parseInt(name.charAt(name.length - 1));
 		this.boundingSphere = boundingBox.getBoundingSphere(new Sphere());
-		this.children = [];
 		this.numPoints = 0;
 		this.oneTimeDisposeHandlers = [];
 	}
@@ -28,15 +27,9 @@ export class OctreeGeometryNode implements IPointCloudTreeNode{
 	spacing!: number;
 	density?: number;
 	isLeafNode: boolean = true;
-
-	// create static IDCount variable
-	static IDCount = 0;
-
-	id: number;
-	index: number;
-	boundingSphere: Sphere;
-	// children: Record<string, OctreeGeometryNode>;
-	children: ReadonlyArray<OctreeGeometryNode | null> = [
+	readonly isTreeNode: boolean = false;
+  	readonly isGeometryNode: boolean = true;
+	readonly children: ReadonlyArray<OctreeGeometryNode | null> = [
 		null,
 		null,
 		null,
@@ -46,21 +39,27 @@ export class OctreeGeometryNode implements IPointCloudTreeNode{
 		null,
 		null,
 	];
+
+	// create static IDCount variable
+	static IDCount = 0;
+	id: number;
+	index: number;
+	boundingSphere: Sphere;
 	numPoints: number;
 	level!: number;
 	oneTimeDisposeHandlers: Function[];
 
-	isGeometryNode(){
-		return true;
-	}
+	// isGeometryNode(){
+	// 	return true;
+	// }
 
 	getLevel(){
 		return this.level;
 	}
 
-	isTreeNode(){
-		return false;
-	}
+	// isTreeNode(){
+	// 	return false;
+	// } // Converted to property
 
 	isLoaded(){
 		return this.loaded;
@@ -86,9 +85,9 @@ export class OctreeGeometryNode implements IPointCloudTreeNode{
 		return this.boundingBox;
 	}
 
-	load(potreeInstance:IPotree){
+	load(){
 
-		if (this.octreeGeometry.numNodesLoading >= potreeInstance.maxNumNodesLoading) {
+		if (this.octreeGeometry.numNodesLoading >= this.octreeGeometry.maxNumNodesLoading) {
 			return;
 		}
 

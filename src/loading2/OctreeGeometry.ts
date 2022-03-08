@@ -12,6 +12,7 @@ export class OctreeGeometry{
 	spacing: number = 0;
 	tightBoundingBox: Box3;
 	numNodesLoading: number = 0;
+	maxNumNodesLoading: number = 3; // I don't understand why this is also a property of IPotree then. Duplicate functionality?
 	boundingSphere: Sphere;
 	tightBoundingSphere: Sphere;
 	offset!: Vector3;

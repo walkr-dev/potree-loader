@@ -17,6 +17,7 @@ export interface IPointCloudTreeNode {
   numPoints: number;
   readonly children: ReadonlyArray<IPointCloudTreeNode | null>;
   readonly isLeafNode: boolean;
+  // This probably needs isTreeNode and isGeometryNode as readonly properties too?
 
   dispose(): void;
 
