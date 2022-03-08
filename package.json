@@ -1,6 +1,6 @@
 {
   "name": "potree-loader",
-  "version": "1.9.2",
+  "version": "1.9.5",
   "description": "WebGL point cloud viewer",
   "keywords": [
     "point",
@@ -33,7 +33,6 @@
     "cloud-server": "cd clouds && http-server --cors='*' >nul",
     "watch-test": "parcel example/index.html",
     "dev": "concurrently \"yarn cloud-server\" \"yarn watch-test\""
-
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.3.2",
