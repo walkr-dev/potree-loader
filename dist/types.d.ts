@@ -1,70 +1,4 @@
-import { Color, IUniform as _IUniform1, Vector4, ShaderMaterial, Texture, Box3, Matrix4, Vector3, BufferGeometry, EventDispatcher, Sphere, Camera, WebGLRenderer, Object3D, Points, Ray, WebGLRenderTarget, Material, RawShaderMaterial, Scene } from "three";
-export type IGradient = [number, Color][];
-export interface IClassification {
-    [value: string]: Vector4;
-    DEFAULT: Vector4;
-}
-export interface IUniform<T> extends _IUniform1 {
-    type: string;
-    value: T;
-}
-export interface IBlurMaterialUniforms {
-    [name: string]: IUniform<any>;
-    screenWidth: IUniform<number>;
-    screenHeight: IUniform<number>;
-    map: IUniform<Texture | null>;
-}
-export class BlurMaterial extends ShaderMaterial {
-    uniforms: IBlurMaterialUniforms;
-}
-export enum ClipMode {
-    DISABLED = 0,
-    CLIP_OUTSIDE = 1,
-    HIGHLIGHT_INSIDE = 2
-}
-export interface IClipBox {
-    box: Box3;
-    inverse: Matrix4;
-    matrix: Matrix4;
-    position: Vector3;
-}
-export enum PointSizeType {
-    FIXED = 0,
-    ATTENUATED = 1,
-    ADAPTIVE = 2
-}
-export enum PointShape {
-    SQUARE = 0,
-    CIRCLE = 1,
-    PARABOLOID = 2
-}
-export enum TreeType {
-    OCTREE = 0,
-    KDTREE = 1
-}
-export enum PointOpacityType {
-    FIXED = 0,
-    ATTENUATED = 1
-}
-export enum PointColorType {
-    RGB = 0,
-    COLOR = 1,
-    DEPTH = 2,
-    HEIGHT = 3,
-    ELEVATION = 3,
-    INTENSITY = 4,
-    INTENSITY_GRADIENT = 5,
-    LOD = 6,
-    LEVEL_OF_DETAIL = 6,
-    POINT_INDEX = 7,
-    CLASSIFICATION = 8,
-    RETURN_NUMBER = 9,
-    SOURCE = 10,
-    NORMAL = 11,
-    PHONG = 12,
-    RGB_HEIGHT = 13,
-    COMPOSITE = 50
-}
+import { Box3, BufferGeometry, EventDispatcher, Sphere, Vector3, Camera, WebGLRenderer, Color, IUniform as _IUniform1, Vector4, Matrix4, Object3D, Points, Material, RawShaderMaterial, Scene, Texture, WebGLRenderTarget, Ray } from "three";
 type GetUrlFn = (url: string) => string | Promise<string>;
 type XhrRequest = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
 type PointAttributeTypeType = {
@@ -87,7 +21,7 @@ type PAVectorType = {
     name: string;
     attributes: string[];
 };
-declare class _PointAttributes1 {
+declare class PointAttributes {
     attributes: PointAttribute[];
     byteSize: number;
     size: number;
@@ -105,7 +39,7 @@ declare class WorkerPool {
     getWorker(workerType: WorkerType): Worker;
     returnWorker(workerType: WorkerType, worker: Worker): void;
 }
-export enum PointAttributeName {
+enum PointAttributeName {
     POSITION_CARTESIAN = 0,
     COLOR_PACKED = 1,
     COLOR_FLOATS_1 = 2,
@@ -118,23 +52,22 @@ export enum PointAttributeName {
     NORMAL_OCT16 = 9,
     NORMAL = 10
 }
-export interface PointAttributeType {
+interface PointAttributeType {
     ordinal: number;
     size: number;
 }
-export const POINT_ATTRIBUTE_TYPES: Record<string, PointAttributeType>;
-export interface IPointAttribute {
+interface IPointAttribute {
     name: PointAttributeName;
     type: PointAttributeType;
     numElements: number;
     byteSize: number;
 }
-export interface IPointAttributes {
+interface IPointAttributes {
     attributes: IPointAttribute[];
     byteSize: number;
     size: number;
 }
-export const POINT_ATTRIBUTES: {
+declare const POINT_ATTRIBUTES: {
     POSITION_CARTESIAN: IPointAttribute;
     RGBA_PACKED: IPointAttribute;
     COLOR_PACKED: IPointAttribute;
@@ -147,8 +80,8 @@ export const POINT_ATTRIBUTES: {
     NORMAL_OCT16: IPointAttribute;
     NORMAL: IPointAttribute;
 };
-export type PointAttributeStringName = keyof typeof POINT_ATTRIBUTES;
-export class PointAttributes implements IPointAttributes {
+type PointAttributeStringName = keyof typeof POINT_ATTRIBUTES;
+declare class _PointAttributes1 implements IPointAttributes {
     attributes: IPointAttribute[];
     byteSize: number;
     size: number;
@@ -157,12 +90,12 @@ export class PointAttributes implements IPointAttributes {
     hasColors(): boolean;
     hasNormals(): boolean;
 }
-export interface NodeData {
+interface NodeData {
     children: number;
     numPoints: number;
     name: string;
 }
-export class PointCloudOctreeGeometryNode extends EventDispatcher implements IPointCloudTreeNode {
+declare class PointCloudOctreeGeometryNode extends EventDispatcher implements IPointCloudTreeNode {
     id: number;
     name: string;
     pcoGeometry: PointCloudOctreeGeometry;
@@ -242,7 +175,7 @@ declare class BinaryLoader {
     dispose(): void;
     load(node: PointCloudOctreeGeometryNode): Promise<void>;
 }
-export class PointCloudOctreeGeometry {
+declare class PointCloudOctreeGeometry {
     loader: BinaryLoader;
     boundingBox: Box3;
     tightBoundingBox: Box3;
@@ -257,7 +190,7 @@ export class PointCloudOctreeGeometry {
     numNodesLoading: number;
     maxNumNodesLoading: number;
     spacing: number;
-    pointAttributes: PointAttributes;
+    pointAttributes: _PointAttributes1;
     projection: any;
     url: string | null;
     constructor(loader: BinaryLoader, boundingBox: Box3, tightBoundingBox: Box3, offset: Vector3, xhrRequest: XhrRequest);
@@ -384,7 +317,7 @@ declare class NodeLoader {
     url: string;
     workerPool: WorkerPool;
     metadata: Metadata;
-    attributes?: _PointAttributes1;
+    attributes?: PointAttributes;
     scale?: [number, number, number];
     offset?: [number, number, number];
     constructor(url: string, workerPool: WorkerPool, metadata: Metadata);
@@ -480,7 +413,7 @@ declare class OctreeGeometry {
     boundingBox: Box3;
     root: OctreeGeometryNode;
     url: string | null;
-    pointAttributes: _PointAttributes1 | null;
+    pointAttributes: PointAttributes | null;
     spacing: number;
     tightBoundingBox: Box3;
     numNodesLoading: number;
@@ -494,7 +427,64 @@ declare class OctreeGeometry {
     constructor(loader: NodeLoader, boundingBox: Box3);
     dispose(): void;
 }
-export class PointCloudOctreeNode extends EventDispatcher implements IPointCloudTreeNode {
+type IGradient = [number, Color][];
+interface IClassification {
+    [value: string]: Vector4;
+    DEFAULT: Vector4;
+}
+interface IUniform<T> extends _IUniform1 {
+    type: string;
+    value: T;
+}
+enum ClipMode {
+    DISABLED = 0,
+    CLIP_OUTSIDE = 1,
+    HIGHLIGHT_INSIDE = 2
+}
+interface IClipBox {
+    box: Box3;
+    inverse: Matrix4;
+    matrix: Matrix4;
+    position: Vector3;
+}
+enum PointSizeType {
+    FIXED = 0,
+    ATTENUATED = 1,
+    ADAPTIVE = 2
+}
+enum PointShape {
+    SQUARE = 0,
+    CIRCLE = 1,
+    PARABOLOID = 2
+}
+enum TreeType {
+    OCTREE = 0,
+    KDTREE = 1
+}
+enum PointOpacityType {
+    FIXED = 0,
+    ATTENUATED = 1
+}
+enum PointColorType {
+    RGB = 0,
+    COLOR = 1,
+    DEPTH = 2,
+    HEIGHT = 3,
+    ELEVATION = 3,
+    INTENSITY = 4,
+    INTENSITY_GRADIENT = 5,
+    LOD = 6,
+    LEVEL_OF_DETAIL = 6,
+    POINT_INDEX = 7,
+    CLASSIFICATION = 8,
+    RETURN_NUMBER = 9,
+    SOURCE = 10,
+    NORMAL = 11,
+    PHONG = 12,
+    RGB_HEIGHT = 13,
+    COMPOSITE = 50
+}
+declare class PointCloudOctreeNode extends EventDispatcher implements IPointCloudTreeNode {
     geometryNode: PointCloudOctreeGeometryNode;
     sceneNode: Points;
     pcIndex: number | undefined;
@@ -517,87 +507,14 @@ export class PointCloudOctreeNode extends EventDispatcher implements IPointCloud
     get boundingBox(): Box3;
     get spacing(): number;
 }
-export interface PickParams {
-    pickWindowSize: number;
-    pickOutsideClipRegion: boolean;
-    /**
-     * If provided, the picking will use this pixel position instead of the `Ray` passed to the `pick`
-     * method.
-     */
-    pixelPosition: Vector3;
-    /**
-     * Function which gets called after a picking material has been created and setup and before the
-     * point cloud is rendered into the picking render target. This gives applications a chance to
-     * customize the renderTarget and the material.
-     *
-     * @param material
-     *    The pick material.
-     * @param renterTarget
-     *    The render target used for picking.
-     */
-    onBeforePickRender: (material: PointCloudMaterial, renterTarget: WebGLRenderTarget) => void;
-}
-export class PointCloudOctreePicker {
-    dispose(): void;
-    pick(renderer: WebGLRenderer, camera: Camera, ray: Ray, octrees: PointCloudOctree[], params?: Partial<PickParams>): PickPoint | null;
-}
-export class PointCloudTree extends Object3D {
-    root: IPointCloudTreeNode | null;
-    initialized(): boolean;
-}
-export class PointCloudOctree extends PointCloudTree {
-    potree: IPotree;
-    disposed: boolean;
-    pcoGeometry: PCOGeometry;
-    boundingBox: Box3;
-    boundingSphere: Sphere;
-    material: PointCloudMaterial;
-    level: number;
-    maxLevel: number;
-    /**
-     * The minimum radius of a node's bounding sphere on the screen in order to be displayed.
-     */
-    minNodePixelSize: number;
-    root: IPointCloudTreeNode | null;
-    boundingBoxNodes: Object3D[];
-    visibleNodes: PointCloudOctreeNode[];
-    visibleGeometry: PointCloudOctreeGeometryNode[];
-    numVisiblePoints: number;
-    showBoundingBox: boolean;
-    constructor(potree: IPotree, pcoGeometry: PCOGeometry, material?: PointCloudMaterial);
-    dispose(): void;
-    get pointSizeType(): PointSizeType;
-    set pointSizeType(value: PointSizeType);
-    toTreeNode(geometryNode: PointCloudOctreeGeometryNode, parent?: PointCloudOctreeNode | null): PointCloudOctreeNode;
-    updateVisibleBounds(): void;
-    updateBoundingBoxes(): void;
-    updateMatrixWorld(force: boolean): void;
-    hideDescendants(object: Object3D): void;
-    moveToOrigin(): void;
-    moveToGroundPlane(): void;
-    getBoundingBoxWorld(): Box3;
-    getVisibleExtent(): Box3;
-    pick(renderer: WebGLRenderer, camera: Camera, ray: Ray, params?: Partial<PickParams>): PickPoint | null;
-    get progress(): number;
-}
-export const GRAYSCALE: IGradient;
-export const INFERNO: IGradient;
-export const PLASMA: IGradient;
-export const RAINBOW: IGradient;
-export const SPECTRAL: IGradient;
-export const VIRIDIS: IGradient;
-export const YELLOW_GREEN: IGradient;
-export function generateDataTexture(width: number, height: number, color: Color): Texture;
-export function generateGradientTexture(gradient: IGradient): Texture;
-export function generateClassificationTexture(classification: IClassification): Texture;
-export interface IPointCloudMaterialParameters {
+interface IPointCloudMaterialParameters {
     size: number;
     minSize: number;
     maxSize: number;
     treeType: TreeType;
     newFormat: boolean;
 }
-export interface IPointCloudMaterialUniforms {
+interface IPointCloudMaterialUniforms {
     bbSize: IUniform<[number, number, number]>;
     blendDepthSupplement: IUniform<number>;
     blendHardness: IUniform<number>;
@@ -645,7 +562,7 @@ export interface IPointCloudMaterialUniforms {
     enablePointHighlighting: IUniform<boolean>;
     highlightedPointScale: IUniform<number>;
 }
-export class PointCloudMaterial extends RawShaderMaterial {
+declare class PointCloudMaterial extends RawShaderMaterial {
     lights: boolean;
     fog: boolean;
     numClipBoxes: number;
@@ -752,6 +669,65 @@ export class PointCloudMaterial extends RawShaderMaterial {
     setUniform<K extends keyof IPointCloudMaterialUniforms>(name: K, value: IPointCloudMaterialUniforms[K]['value']): void;
     updateMaterial(octree: PointCloudOctree, visibleNodes: PointCloudOctreeNode[], camera: Camera, renderer: WebGLRenderer): void;
     static makeOnBeforeRender(octree: PointCloudOctree, node: PointCloudOctreeNode, pcIndex?: number): (_renderer: WebGLRenderer, _scene: Scene, _camera: Camera, _geometry: BufferGeometry, material: Material) => void;
+}
+interface PickParams {
+    pickWindowSize: number;
+    pickOutsideClipRegion: boolean;
+    /**
+     * If provided, the picking will use this pixel position instead of the `Ray` passed to the `pick`
+     * method.
+     */
+    pixelPosition: Vector3;
+    /**
+     * Function which gets called after a picking material has been created and setup and before the
+     * point cloud is rendered into the picking render target. This gives applications a chance to
+     * customize the renderTarget and the material.
+     *
+     * @param material
+     *    The pick material.
+     * @param renterTarget
+     *    The render target used for picking.
+     */
+    onBeforePickRender: (material: PointCloudMaterial, renterTarget: WebGLRenderTarget) => void;
+}
+declare class PointCloudTree extends Object3D {
+    root: IPointCloudTreeNode | null;
+    initialized(): boolean;
+}
+export class PointCloudOctree extends PointCloudTree {
+    potree: IPotree;
+    disposed: boolean;
+    pcoGeometry: PCOGeometry;
+    boundingBox: Box3;
+    boundingSphere: Sphere;
+    material: PointCloudMaterial;
+    level: number;
+    maxLevel: number;
+    /**
+     * The minimum radius of a node's bounding sphere on the screen in order to be displayed.
+     */
+    minNodePixelSize: number;
+    root: IPointCloudTreeNode | null;
+    boundingBoxNodes: Object3D[];
+    visibleNodes: PointCloudOctreeNode[];
+    visibleGeometry: PointCloudOctreeGeometryNode[];
+    numVisiblePoints: number;
+    showBoundingBox: boolean;
+    constructor(potree: IPotree, pcoGeometry: PCOGeometry, material?: PointCloudMaterial);
+    dispose(): void;
+    get pointSizeType(): PointSizeType;
+    set pointSizeType(value: PointSizeType);
+    toTreeNode(geometryNode: PointCloudOctreeGeometryNode, parent?: PointCloudOctreeNode | null): PointCloudOctreeNode;
+    updateVisibleBounds(): void;
+    updateBoundingBoxes(): void;
+    updateMatrixWorld(force: boolean): void;
+    hideDescendants(object: Object3D): void;
+    moveToOrigin(): void;
+    moveToGroundPlane(): void;
+    getBoundingBoxWorld(): Box3;
+    getVisibleExtent(): Box3;
+    pick(renderer: WebGLRenderer, camera: Camera, ray: Ray, params?: Partial<PickParams>): PickPoint | null;
+    get progress(): number;
 }
 export class QueueItem {
     pointCloudIndex: number;

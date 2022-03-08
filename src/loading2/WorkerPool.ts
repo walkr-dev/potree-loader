@@ -8,7 +8,7 @@ export enum WorkerType {
 // EptZstandardDecoder_preamble.js", "EptZstandardDecoderWorker.js", "LASDecoderWorker.js", "LASLAZWorker.js", "LazLoaderWorker.js"
 
 function createWorker(type: WorkerType): Worker {
-	console.log(type)
+	// console.log(type)
 	switch (type) {
 		case WorkerType.DECODER_WORKER_BROTLI: {
             // const worker = require("./brotli-decoder.worker.js");

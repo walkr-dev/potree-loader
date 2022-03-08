@@ -1,31 +1,55 @@
-import {ShaderMaterial as $hgUW1$ShaderMaterial, Texture as $hgUW1$Texture, Color as $hgUW1$Color, Vector3 as $hgUW1$Vector3, NearestFilter as $hgUW1$NearestFilter, NoBlending as $hgUW1$NoBlending, LessEqualDepth as $hgUW1$LessEqualDepth, AdditiveBlending as $hgUW1$AdditiveBlending, WebGLRenderTarget as $hgUW1$WebGLRenderTarget, RawShaderMaterial as $hgUW1$RawShaderMaterial, Vector4 as $hgUW1$Vector4, DataTexture as $hgUW1$DataTexture, RGBAFormat as $hgUW1$RGBAFormat, CanvasTexture as $hgUW1$CanvasTexture, LinearFilter as $hgUW1$LinearFilter, Sphere as $hgUW1$Sphere, EventDispatcher as $hgUW1$EventDispatcher, Box3 as $hgUW1$Box3, BufferGeometry as $hgUW1$BufferGeometry, Points as $hgUW1$Points, Scene as $hgUW1$Scene, Object3D as $hgUW1$Object3D, Vector2 as $hgUW1$Vector2, Matrix4 as $hgUW1$Matrix4, Frustum as $hgUW1$Frustum, BufferAttribute as $hgUW1$BufferAttribute, Uint8BufferAttribute as $hgUW1$Uint8BufferAttribute, LineBasicMaterial as $hgUW1$LineBasicMaterial, LineSegments as $hgUW1$LineSegments} from "three";
+import {Box3 as $hgUW1$Box3, Sphere as $hgUW1$Sphere, Points as $hgUW1$Points, Object3D as $hgUW1$Object3D, Vector3 as $hgUW1$Vector3, Color as $hgUW1$Color, Vector4 as $hgUW1$Vector4, ShaderMaterial as $hgUW1$ShaderMaterial, Texture as $hgUW1$Texture, NearestFilter as $hgUW1$NearestFilter, NoBlending as $hgUW1$NoBlending, LessEqualDepth as $hgUW1$LessEqualDepth, AdditiveBlending as $hgUW1$AdditiveBlending, WebGLRenderTarget as $hgUW1$WebGLRenderTarget, RawShaderMaterial as $hgUW1$RawShaderMaterial, DataTexture as $hgUW1$DataTexture, RGBAFormat as $hgUW1$RGBAFormat, CanvasTexture as $hgUW1$CanvasTexture, LinearFilter as $hgUW1$LinearFilter, BufferGeometry as $hgUW1$BufferGeometry, EventDispatcher as $hgUW1$EventDispatcher, Scene as $hgUW1$Scene, Vector2 as $hgUW1$Vector2, Matrix4 as $hgUW1$Matrix4, Frustum as $hgUW1$Frustum, BufferAttribute as $hgUW1$BufferAttribute, Uint8BufferAttribute as $hgUW1$Uint8BufferAttribute, LineBasicMaterial as $hgUW1$LineBasicMaterial, LineSegments as $hgUW1$LineSegments} from "three";
 
-function $parcel$exportWildcard(dest, source) {
-  Object.keys(source).forEach(function(key) {
-    if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) {
-      return;
-    }
-
-    Object.defineProperty(dest, key, {
-      enumerable: true,
-      get: function get() {
-        return source[key];
-      }
-    });
-  });
-
-  return dest;
-}
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
-var $ddbabd1d335f84a9$exports = {};
-var $886301ae952e8f57$exports = {};
+var $262d91a572d1a9aa$exports = {};
 
-$parcel$export($886301ae952e8f57$exports, "BlurMaterial", () => $886301ae952e8f57$export$ec8ead0ea9fedf30);
+$parcel$export($262d91a572d1a9aa$exports, "PointCloudOctree", () => $262d91a572d1a9aa$export$9ad96d5c091c935a);
+
+class $6a1ce7575451c169$export$6adf8357aea718ed {
+    constructor(loader, boundingBox){
+        this.loader = loader;
+        this.boundingBox = boundingBox;
+        this.url = null;
+        this.pointAttributes = null;
+        this.spacing = 0;
+        this.numNodesLoading = 0;
+        this.maxNumNodesLoading = 3; // I don't understand why this is also a property of IPotree then. Duplicate functionality?
+        this.disposed = false;
+        this.tightBoundingBox = this.boundingBox.clone();
+        this.boundingSphere = this.boundingBox.getBoundingSphere(new $hgUW1$Sphere());
+        this.tightBoundingSphere = this.boundingBox.getBoundingSphere(new $hgUW1$Sphere());
+    }
+    dispose() {
+        // this.loader.dispose();
+        this.root.traverse((node)=>node.dispose()
+        );
+        this.disposed = true;
+    }
+}
+
+
+
+
+const $495369f3383d41e2$export$d8264162e39166da = 0;
+const $495369f3383d41e2$export$f5bcf4061d6c95ff = 0;
+const $495369f3383d41e2$export$3dfcde43b7e3a6b2 = 1;
+const $495369f3383d41e2$export$4085dab35b4d87d0 = 50;
+const $495369f3383d41e2$export$3b9a069507d71e62 = 50;
+const $495369f3383d41e2$export$1239abc5c6b6b638 = 2;
+const $495369f3383d41e2$export$3afb6949e9e95986 = 15;
+const $495369f3383d41e2$export$c8c6b7c1efe52f9c = 1000000;
+const $495369f3383d41e2$export$ab0b8debcb3d8b4b = 2;
+const $495369f3383d41e2$export$1cee45d320f06d39 = 4;
+const $495369f3383d41e2$export$8900560817e7f3be = 'PerspectiveCamera';
+const $495369f3383d41e2$export$b20901887aa920fd = new $hgUW1$Color(0, 0, 0);
+const $495369f3383d41e2$export$4b15acc9c405c4bd = new $hgUW1$Vector4(1, 0, 0, 1);
+
+
 
 class $886301ae952e8f57$export$ec8ead0ea9fedf30 extends $hgUW1$ShaderMaterial {
     constructor(){
@@ -50,9 +74,6 @@ class $886301ae952e8f57$export$ec8ead0ea9fedf30 extends $hgUW1$ShaderMaterial {
 }
 
 
-var $7b3263892bf52898$exports = {};
-
-$parcel$export($7b3263892bf52898$exports, "ClipMode", () => $7b3263892bf52898$export$e04e7431702ec10a);
 var $7b3263892bf52898$export$e04e7431702ec10a;
 (function($7b3263892bf52898$export$e04e7431702ec10a) {
     $7b3263892bf52898$export$e04e7431702ec10a[$7b3263892bf52898$export$e04e7431702ec10a["DISABLED"] = 0] = "DISABLED";
@@ -62,13 +83,6 @@ var $7b3263892bf52898$export$e04e7431702ec10a;
 }));
 
 
-var $5e4fff88bfda53ee$exports = {};
-
-$parcel$export($5e4fff88bfda53ee$exports, "PointSizeType", () => $5e4fff88bfda53ee$export$d1cbf822ea081fee);
-$parcel$export($5e4fff88bfda53ee$exports, "PointShape", () => $5e4fff88bfda53ee$export$5ffaab227f4e4906);
-$parcel$export($5e4fff88bfda53ee$exports, "TreeType", () => $5e4fff88bfda53ee$export$eaf124a76310c668);
-$parcel$export($5e4fff88bfda53ee$exports, "PointOpacityType", () => $5e4fff88bfda53ee$export$b3da46a9b4c877b5);
-$parcel$export($5e4fff88bfda53ee$exports, "PointColorType", () => $5e4fff88bfda53ee$export$e95c0b95a8f50828);
 var $5e4fff88bfda53ee$export$d1cbf822ea081fee;
 (function($5e4fff88bfda53ee$export$d1cbf822ea081fee) {
     $5e4fff88bfda53ee$export$d1cbf822ea081fee[$5e4fff88bfda53ee$export$d1cbf822ea081fee["FIXED"] = 0] = "FIXED";
@@ -131,21 +145,6 @@ $9d44389b42069366$exports = "#version 300 es\n\nprecision highp float;\nprecisio
 
 
 
-const $495369f3383d41e2$export$d8264162e39166da = 0;
-const $495369f3383d41e2$export$f5bcf4061d6c95ff = 0;
-const $495369f3383d41e2$export$3dfcde43b7e3a6b2 = 1;
-const $495369f3383d41e2$export$4085dab35b4d87d0 = 50;
-const $495369f3383d41e2$export$3b9a069507d71e62 = 50;
-const $495369f3383d41e2$export$1239abc5c6b6b638 = 2;
-const $495369f3383d41e2$export$3afb6949e9e95986 = 15;
-const $495369f3383d41e2$export$c8c6b7c1efe52f9c = 1000000;
-const $495369f3383d41e2$export$ab0b8debcb3d8b4b = 2;
-const $495369f3383d41e2$export$1cee45d320f06d39 = 4;
-const $495369f3383d41e2$export$8900560817e7f3be = 'PerspectiveCamera';
-const $495369f3383d41e2$export$b20901887aa920fd = new $hgUW1$Color(0, 0, 0);
-const $495369f3383d41e2$export$4b15acc9c405c4bd = new $hgUW1$Vector4(1, 0, 0, 1);
-
-
 function $5de7f1de3e851041$export$dd1fe7c4c1e496ce(name) {
     return parseInt(name.charAt(name.length - 1), 10);
 }
@@ -178,10 +177,6 @@ const $453c0a8ef7e718e1$export$9b199c3271672261 = {
 
 
 
-var $56280d40890ebad7$exports = {};
-var $e9094b64304453a9$exports = {};
-
-$parcel$export($e9094b64304453a9$exports, "GRAYSCALE", () => $e9094b64304453a9$export$795f08762ba1b68c);
 
 const $e9094b64304453a9$export$795f08762ba1b68c = [
     [
@@ -195,9 +190,6 @@ const $e9094b64304453a9$export$795f08762ba1b68c = [
 ];
 
 
-var $de7fe8deb64de9a4$exports = {};
-
-$parcel$export($de7fe8deb64de9a4$exports, "INFERNO", () => $de7fe8deb64de9a4$export$26ffe1805c7bf718);
 
 const $de7fe8deb64de9a4$export$26ffe1805c7bf718 = [
     [
@@ -247,9 +239,6 @@ const $de7fe8deb64de9a4$export$26ffe1805c7bf718 = [
 ];
 
 
-var $b45e8c3ed76e3d5b$exports = {};
-
-$parcel$export($b45e8c3ed76e3d5b$exports, "PLASMA", () => $b45e8c3ed76e3d5b$export$6c89e34c5e9ab660);
 
 const $b45e8c3ed76e3d5b$export$6c89e34c5e9ab660 = [
     [
@@ -299,9 +288,6 @@ const $b45e8c3ed76e3d5b$export$6c89e34c5e9ab660 = [
 ];
 
 
-var $4982ed7e4b958d27$exports = {};
-
-$parcel$export($4982ed7e4b958d27$exports, "RAINBOW", () => $4982ed7e4b958d27$export$fc43e6ea480ea76f);
 
 const $4982ed7e4b958d27$export$fc43e6ea480ea76f = [
     [
@@ -335,9 +321,6 @@ const $4982ed7e4b958d27$export$fc43e6ea480ea76f = [
 ];
 
 
-var $855161ee86562854$exports = {};
-
-$parcel$export($855161ee86562854$exports, "SPECTRAL", () => $855161ee86562854$export$8beb2468e5d7f653);
 
 const $855161ee86562854$export$8beb2468e5d7f653 = [
     [
@@ -387,9 +370,6 @@ const $855161ee86562854$export$8beb2468e5d7f653 = [
 ];
 
 
-var $874a1d158524c990$exports = {};
-
-$parcel$export($874a1d158524c990$exports, "VIRIDIS", () => $874a1d158524c990$export$d793f114aad17738);
 
 const $874a1d158524c990$export$d793f114aad17738 = [
     [
@@ -439,9 +419,6 @@ const $874a1d158524c990$export$d793f114aad17738 = [
 ];
 
 
-var $2dd88a2a4c2e9932$exports = {};
-
-$parcel$export($2dd88a2a4c2e9932$exports, "YELLOW_GREEN", () => $2dd88a2a4c2e9932$export$c97e84e6a442ddd4);
 
 const $2dd88a2a4c2e9932$export$c97e84e6a442ddd4 = [
     [
@@ -491,20 +468,8 @@ const $2dd88a2a4c2e9932$export$c97e84e6a442ddd4 = [
 ];
 
 
-$parcel$exportWildcard($56280d40890ebad7$exports, $e9094b64304453a9$exports);
-$parcel$exportWildcard($56280d40890ebad7$exports, $de7fe8deb64de9a4$exports);
-$parcel$exportWildcard($56280d40890ebad7$exports, $b45e8c3ed76e3d5b$exports);
-$parcel$exportWildcard($56280d40890ebad7$exports, $4982ed7e4b958d27$exports);
-$parcel$exportWildcard($56280d40890ebad7$exports, $855161ee86562854$exports);
-$parcel$exportWildcard($56280d40890ebad7$exports, $874a1d158524c990$exports);
-$parcel$exportWildcard($56280d40890ebad7$exports, $2dd88a2a4c2e9932$exports);
 
 
-var $3fa0b589b7342ac5$exports = {};
-
-$parcel$export($3fa0b589b7342ac5$exports, "generateDataTexture", () => $3fa0b589b7342ac5$export$1e96beb2edc20271);
-$parcel$export($3fa0b589b7342ac5$exports, "generateGradientTexture", () => $3fa0b589b7342ac5$export$fdceb370ef27f1c7);
-$parcel$export($3fa0b589b7342ac5$exports, "generateClassificationTexture", () => $3fa0b589b7342ac5$export$20a331fc7ad618b2);
 
 function $3fa0b589b7342ac5$export$1e96beb2edc20271(width, height, color) {
     const size = width * height;
@@ -1151,408 +1116,11 @@ function $104fbfc219aa06c4$var$requiresShaderUpdate() {
 
 
 
-var $6c56a4539ef01077$exports = {};
 
 
 
-$parcel$exportWildcard($ddbabd1d335f84a9$exports, $886301ae952e8f57$exports);
-$parcel$exportWildcard($ddbabd1d335f84a9$exports, $7b3263892bf52898$exports);
-$parcel$exportWildcard($ddbabd1d335f84a9$exports, $5e4fff88bfda53ee$exports);
-$parcel$exportWildcard($ddbabd1d335f84a9$exports, $104fbfc219aa06c4$exports);
-$parcel$exportWildcard($ddbabd1d335f84a9$exports, $3fa0b589b7342ac5$exports);
-$parcel$exportWildcard($ddbabd1d335f84a9$exports, $6c56a4539ef01077$exports);
-$parcel$exportWildcard($ddbabd1d335f84a9$exports, $56280d40890ebad7$exports);
 
 
-var $6917a634b1124b58$exports = {};
-
-$parcel$export($6917a634b1124b58$exports, "PointAttributeName", () => $6917a634b1124b58$export$718faa7d6d01aabc);
-$parcel$export($6917a634b1124b58$exports, "POINT_ATTRIBUTE_TYPES", () => $6917a634b1124b58$export$f447a8ca794d62f1);
-$parcel$export($6917a634b1124b58$exports, "POINT_ATTRIBUTES", () => $6917a634b1124b58$export$c9c943992b7ca9cc);
-$parcel$export($6917a634b1124b58$exports, "PointAttributes", () => $6917a634b1124b58$export$33a55c29cc28473e);
-var $6917a634b1124b58$export$718faa7d6d01aabc;
-(function($6917a634b1124b58$export$718faa7d6d01aabc) {
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["POSITION_CARTESIAN"] = 0] = "POSITION_CARTESIAN";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["COLOR_PACKED"] = 1] = "COLOR_PACKED";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["COLOR_FLOATS_1"] = 2] = "COLOR_FLOATS_1";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["COLOR_FLOATS_255"] = 3] = "COLOR_FLOATS_255";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL_FLOATS"] = 4] = "NORMAL_FLOATS";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["FILLER"] = 5] = "FILLER";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["INTENSITY"] = 6] = "INTENSITY";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["CLASSIFICATION"] = 7] = "CLASSIFICATION";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL_SPHEREMAPPED"] = 8] = "NORMAL_SPHEREMAPPED";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL_OCT16"] = 9] = "NORMAL_OCT16";
-    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL"] = 10] = "NORMAL";
-})($6917a634b1124b58$export$718faa7d6d01aabc || ($6917a634b1124b58$export$718faa7d6d01aabc = {
-}));
-const $6917a634b1124b58$export$f447a8ca794d62f1 = {
-    DATA_TYPE_DOUBLE: {
-        ordinal: 0,
-        size: 8
-    },
-    DATA_TYPE_FLOAT: {
-        ordinal: 1,
-        size: 4
-    },
-    DATA_TYPE_INT8: {
-        ordinal: 2,
-        size: 1
-    },
-    DATA_TYPE_UINT8: {
-        ordinal: 3,
-        size: 1
-    },
-    DATA_TYPE_INT16: {
-        ordinal: 4,
-        size: 2
-    },
-    DATA_TYPE_UINT16: {
-        ordinal: 5,
-        size: 2
-    },
-    DATA_TYPE_INT32: {
-        ordinal: 6,
-        size: 4
-    },
-    DATA_TYPE_UINT32: {
-        ordinal: 7,
-        size: 4
-    },
-    DATA_TYPE_INT64: {
-        ordinal: 8,
-        size: 8
-    },
-    DATA_TYPE_UINT64: {
-        ordinal: 9,
-        size: 8
-    }
-};
-function $6917a634b1124b58$var$makePointAttribute(name, type, numElements) {
-    return {
-        name: name,
-        type: type,
-        numElements: numElements,
-        byteSize: numElements * type.size
-    };
-}
-const $6917a634b1124b58$var$RGBA_PACKED = $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.COLOR_PACKED, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_INT8, 4);
-const $6917a634b1124b58$export$c9c943992b7ca9cc = {
-    POSITION_CARTESIAN: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.POSITION_CARTESIAN, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_FLOAT, 3),
-    RGBA_PACKED: $6917a634b1124b58$var$RGBA_PACKED,
-    COLOR_PACKED: $6917a634b1124b58$var$RGBA_PACKED,
-    RGB_PACKED: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.COLOR_PACKED, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_INT8, 3),
-    NORMAL_FLOATS: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_FLOATS, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_FLOAT, 3),
-    FILLER_1B: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.FILLER, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 1),
-    INTENSITY: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.INTENSITY, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT16, 1),
-    CLASSIFICATION: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.CLASSIFICATION, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 1),
-    NORMAL_SPHEREMAPPED: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_SPHEREMAPPED, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 2),
-    NORMAL_OCT16: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_OCT16, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 2),
-    NORMAL: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_FLOAT, 3)
-};
-class $6917a634b1124b58$export$33a55c29cc28473e {
-    constructor(pointAttributeNames = []){
-        this.attributes = [];
-        this.byteSize = 0;
-        this.size = 0;
-        for(let i = 0; i < pointAttributeNames.length; i++){
-            const pointAttributeName = pointAttributeNames[i];
-            const pointAttribute = $6917a634b1124b58$export$c9c943992b7ca9cc[pointAttributeName];
-            this.attributes.push(pointAttribute);
-            this.byteSize += pointAttribute.byteSize;
-            this.size++;
-        }
-    }
-    add(pointAttribute) {
-        this.attributes.push(pointAttribute);
-        this.byteSize += pointAttribute.byteSize;
-        this.size++;
-    }
-    hasColors() {
-        return this.attributes.find($6917a634b1124b58$var$isColorAttribute) !== undefined;
-    }
-    hasNormals() {
-        return this.attributes.find($6917a634b1124b58$var$isNormalAttribute) !== undefined;
-    }
-}
-function $6917a634b1124b58$var$isColorAttribute({ name: name  }) {
-    return name === $6917a634b1124b58$export$718faa7d6d01aabc.COLOR_PACKED;
-}
-function $6917a634b1124b58$var$isNormalAttribute({ name: name  }) {
-    return name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_SPHEREMAPPED || name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_FLOATS || name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL || name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_OCT16;
-}
-
-
-var $2c1acd357a20f870$exports = {};
-
-$parcel$export($2c1acd357a20f870$exports, "PointCloudOctreeGeometryNode", () => $2c1acd357a20f870$export$fdc7d6e1ad096869);
-
-
-function $a82247cbc40359bf$export$271c8c0f20afa0bd(box, transform) {
-    return new $hgUW1$Box3().setFromPoints([
-        new $hgUW1$Vector3(box.min.x, box.min.y, box.min.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.min.x, box.min.y, box.min.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.max.x, box.min.y, box.min.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.min.x, box.max.y, box.min.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.min.x, box.min.y, box.max.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.min.x, box.max.y, box.max.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.max.x, box.max.y, box.min.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.max.x, box.min.y, box.max.z).applyMatrix4(transform),
-        new $hgUW1$Vector3(box.max.x, box.max.y, box.max.z).applyMatrix4(transform), 
-    ]);
-}
-function $a82247cbc40359bf$export$4662b4e8868a3779(aabb, index) {
-    const min = aabb.min.clone();
-    const max = aabb.max.clone();
-    const size = new $hgUW1$Vector3().subVectors(max, min);
-    // tslint:disable-next-line:no-bitwise
-    if ((index & 1) > 0) min.z += size.z / 2;
-    else max.z -= size.z / 2;
-    // tslint:disable-next-line:no-bitwise
-    if ((index & 2) > 0) min.y += size.y / 2;
-    else max.y -= size.y / 2;
-    // tslint:disable-next-line:no-bitwise
-    if ((index & 4) > 0) min.x += size.x / 2;
-    else max.x -= size.x / 2;
-    return new $hgUW1$Box3(min, max);
-}
-
-
-
-const $2c1acd357a20f870$var$NODE_STRIDE = 5;
-class $2c1acd357a20f870$export$fdc7d6e1ad096869 extends $hgUW1$EventDispatcher {
-    constructor(name, pcoGeometry, boundingBox){
-        super();
-        this.id = $2c1acd357a20f870$export$fdc7d6e1ad096869.idCount++;
-        this.level = 0;
-        this.spacing = 0;
-        this.hasChildren = false;
-        this.children = [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null, 
-        ];
-        this.mean = new $hgUW1$Vector3();
-        this.numPoints = 0;
-        this.loaded = false;
-        this.loading = false;
-        this.failed = false;
-        this.parent = null;
-        this.oneTimeDisposeHandlers = [];
-        this.isLeafNode = true;
-        this.isTreeNode = false;
-        this.isGeometryNode = true;
-        this.name = name;
-        this.index = $5de7f1de3e851041$export$dd1fe7c4c1e496ce(name);
-        this.pcoGeometry = pcoGeometry;
-        this.boundingBox = boundingBox;
-        this.tightBoundingBox = boundingBox.clone();
-        this.boundingSphere = boundingBox.getBoundingSphere(new $hgUW1$Sphere());
-    }
-    dispose() {
-        if (!this.geometry || !this.parent) return;
-        this.geometry.dispose();
-        this.geometry = undefined;
-        this.loaded = false;
-        this.oneTimeDisposeHandlers.forEach((handler)=>handler()
-        );
-        this.oneTimeDisposeHandlers = [];
-    }
-    /**
-     * Gets the url of the binary file for this node.
-     */ getUrl() {
-        const geometry = this.pcoGeometry;
-        const version = geometry.loader.version;
-        const pathParts = [
-            geometry.octreeDir
-        ];
-        if (geometry.loader && version.equalOrHigher('1.5')) {
-            pathParts.push(this.getHierarchyBaseUrl());
-            pathParts.push(this.name);
-        } else if (version.equalOrHigher('1.4')) pathParts.push(this.name);
-        else if (version.upTo('1.3')) pathParts.push(this.name);
-        return pathParts.join('/');
-    }
-    /**
-     * Gets the url of the hierarchy file for this node.
-     */ getHierarchyUrl() {
-        return `${this.pcoGeometry.octreeDir}/${this.getHierarchyBaseUrl()}/${this.name}.hrc`;
-    }
-    /**
-     * Adds the specified node as a child of the current node.
-     *
-     * @param child
-     *    The node which is to be added as a child.
-     */ addChild(child) {
-        this.children[child.index] = child;
-        this.isLeafNode = false;
-        child.parent = this;
-    }
-    /**
-     * Calls the specified callback for the current node (if includeSelf is set to true) and all its
-     * children.
-     *
-     * @param cb
-     *    The function which is to be called for each node.
-     */ traverse(cb, includeSelf = true) {
-        const stack = includeSelf ? [
-            this
-        ] : [];
-        let current;
-        while((current = stack.pop()) !== undefined){
-            cb(current);
-            for (const child of current.children)if (child !== null) stack.push(child);
-        }
-    }
-    load() {
-        if (!this.canLoad()) return Promise.resolve();
-        this.loading = true;
-        this.pcoGeometry.numNodesLoading++;
-        this.pcoGeometry.needsUpdate = true;
-        let promise;
-        if (this.pcoGeometry.loader.version.equalOrHigher('1.5') && this.level % this.pcoGeometry.hierarchyStepSize === 0 && this.hasChildren) promise = this.loadHierachyThenPoints();
-        else promise = this.loadPoints();
-        return promise.catch((reason)=>{
-            this.loading = false;
-            this.failed = true;
-            this.pcoGeometry.numNodesLoading--;
-            throw reason;
-        });
-    }
-    canLoad() {
-        return !this.loading && !this.loaded && !this.pcoGeometry.disposed && !this.pcoGeometry.loader.disposed && this.pcoGeometry.numNodesLoading < this.pcoGeometry.maxNumNodesLoading;
-    }
-    loadPoints() {
-        this.pcoGeometry.needsUpdate = true;
-        return this.pcoGeometry.loader.load(this);
-    }
-    loadHierachyThenPoints() {
-        if (this.level % this.pcoGeometry.hierarchyStepSize !== 0) return Promise.resolve();
-        return Promise.resolve(this.pcoGeometry.loader.getUrl(this.getHierarchyUrl())).then((url)=>this.pcoGeometry.xhrRequest(url, {
-                mode: 'cors'
-            })
-        ).then((res)=>res.arrayBuffer()
-        ).then((data)=>this.loadHierarchy(this, data)
-        );
-    }
-    /**
-     * Gets the url of the folder where the hierarchy is, relative to the octreeDir.
-     */ getHierarchyBaseUrl() {
-        const hierarchyStepSize = this.pcoGeometry.hierarchyStepSize;
-        const indices = this.name.substr(1);
-        const numParts = Math.floor(indices.length / hierarchyStepSize);
-        let path = 'r/';
-        for(let i = 0; i < numParts; i++)path += `${indices.substr(i * hierarchyStepSize, hierarchyStepSize)}/`;
-        return path.slice(0, -1);
-    }
-    // tslint:disable:no-bitwise
-    loadHierarchy(node, buffer) {
-        const view = new DataView(buffer);
-        const firstNodeData = this.getNodeData(node.name, 0, view);
-        node.numPoints = firstNodeData.numPoints;
-        // Nodes which need be visited.
-        const stack = [
-            firstNodeData
-        ];
-        // Nodes which have already been decoded. We will take nodes from the stack and place them here.
-        const decoded = [];
-        let offset = $2c1acd357a20f870$var$NODE_STRIDE;
-        while(stack.length > 0){
-            const stackNodeData = stack.shift();
-            // From the last bit, all the way to the 8th one from the right.
-            let mask = 1;
-            for(let i = 0; i < 8 && offset + 1 < buffer.byteLength; i++){
-                if ((stackNodeData.children & mask) !== 0) {
-                    const nodeData = this.getNodeData(stackNodeData.name + i, offset, view);
-                    decoded.push(nodeData); // Node is decoded.
-                    stack.push(nodeData); // Need to check its children.
-                    offset += $2c1acd357a20f870$var$NODE_STRIDE; // Move over to the next node in the buffer.
-                }
-                mask = mask * 2;
-            }
-        }
-        node.pcoGeometry.needsUpdate = true;
-        // Map containing all the nodes.
-        const nodes = new Map();
-        nodes.set(node.name, node);
-        decoded.forEach((nodeData)=>this.addNode(nodeData, node.pcoGeometry, nodes)
-        );
-        node.loadPoints();
-    }
-    // tslint:enable:no-bitwise
-    getNodeData(name, offset, view) {
-        const children = view.getUint8(offset);
-        const numPoints = view.getUint32(offset + 1, true);
-        return {
-            children: children,
-            numPoints: numPoints,
-            name: name
-        };
-    }
-    addNode({ name: name , numPoints: numPoints , children: children  }, pco, nodes) {
-        const index = $5de7f1de3e851041$export$dd1fe7c4c1e496ce(name);
-        const parentName = name.substring(0, name.length - 1);
-        const parentNode = nodes.get(parentName);
-        const level = name.length - 1;
-        const boundingBox = $a82247cbc40359bf$export$4662b4e8868a3779(parentNode.boundingBox, index);
-        const node = new $2c1acd357a20f870$export$fdc7d6e1ad096869(name, pco, boundingBox);
-        node.level = level;
-        node.numPoints = numPoints;
-        node.hasChildren = children > 0;
-        node.spacing = pco.spacing / Math.pow(2, level);
-        parentNode.addChild(node);
-        nodes.set(name, node);
-    }
-}
-$2c1acd357a20f870$export$fdc7d6e1ad096869.idCount = 0;
-
-
-var $57aef60af449f0bf$exports = {};
-
-$parcel$export($57aef60af449f0bf$exports, "PointCloudOctreeGeometry", () => $57aef60af449f0bf$export$bbcd90498494c738);
-
-class $57aef60af449f0bf$export$bbcd90498494c738 {
-    constructor(loader, boundingBox, tightBoundingBox, offset, xhrRequest){
-        this.loader = loader;
-        this.boundingBox = boundingBox;
-        this.tightBoundingBox = tightBoundingBox;
-        this.offset = offset;
-        this.xhrRequest = xhrRequest;
-        this.disposed = false;
-        this.needsUpdate = true;
-        this.octreeDir = '';
-        this.hierarchyStepSize = -1;
-        this.nodes = {
-        };
-        this.numNodesLoading = 0;
-        this.maxNumNodesLoading = 3;
-        this.spacing = 0;
-        this.pointAttributes = new $6917a634b1124b58$export$33a55c29cc28473e([]);
-        this.projection = null;
-        this.url = null;
-    }
-    dispose() {
-        this.loader.dispose();
-        this.root.traverse((node)=>node.dispose()
-        );
-        this.disposed = true;
-    }
-    addNodeLoadedCallback(callback) {
-        this.loader.callbacks.push(callback);
-    }
-    clearNodeLoadedCallbacks() {
-        this.loader.callbacks = [];
-    }
-}
-
-
-var $5b22ec763ed6bfa5$exports = {};
-
-$parcel$export($5b22ec763ed6bfa5$exports, "PointCloudOctreeNode", () => $5b22ec763ed6bfa5$export$ac5505afea26905b);
 
 class $5b22ec763ed6bfa5$export$ac5505afea26905b extends $hgUW1$EventDispatcher {
     constructor(geometryNode, sceneNode){
@@ -1615,9 +1183,6 @@ class $5b22ec763ed6bfa5$export$ac5505afea26905b extends $hgUW1$EventDispatcher {
 }
 
 
-var $deb88b7421585e89$exports = {};
-
-$parcel$export($deb88b7421585e89$exports, "PointCloudOctreePicker", () => $deb88b7421585e89$export$852cc38ee6d1f105);
 
 
 
@@ -1830,41 +1395,6 @@ $deb88b7421585e89$export$852cc38ee6d1f105.helperSphere = new $hgUW1$Sphere();
 $deb88b7421585e89$export$852cc38ee6d1f105.clearColor = new $hgUW1$Color();
 
 
-var $262d91a572d1a9aa$exports = {};
-
-$parcel$export($262d91a572d1a9aa$exports, "PointCloudOctree", () => $262d91a572d1a9aa$export$9ad96d5c091c935a);
-
-class $6a1ce7575451c169$export$6adf8357aea718ed {
-    constructor(loader, boundingBox){
-        this.loader = loader;
-        this.boundingBox = boundingBox;
-        this.url = null;
-        this.pointAttributes = null;
-        this.spacing = 0;
-        this.numNodesLoading = 0;
-        this.maxNumNodesLoading = 3; // I don't understand why this is also a property of IPotree then. Duplicate functionality?
-        this.disposed = false;
-        this.tightBoundingBox = this.boundingBox.clone();
-        this.boundingSphere = this.boundingBox.getBoundingSphere(new $hgUW1$Sphere());
-        this.tightBoundingSphere = this.boundingBox.getBoundingSphere(new $hgUW1$Sphere());
-    }
-    dispose() {
-        // this.loader.dispose();
-        this.root.traverse((node)=>node.dispose()
-        );
-        this.disposed = true;
-    }
-}
-
-
-
-
-
-
-
-var $c5e6e5ed2f67ba3c$exports = {};
-
-$parcel$export($c5e6e5ed2f67ba3c$exports, "PointCloudTree", () => $c5e6e5ed2f67ba3c$export$9dd4354534a21f56);
 
 class $c5e6e5ed2f67ba3c$export$9dd4354534a21f56 extends $hgUW1$Object3D {
     constructor(){
@@ -1876,6 +1406,36 @@ class $c5e6e5ed2f67ba3c$export$9dd4354534a21f56 extends $hgUW1$Object3D {
     }
 }
 
+
+
+function $a82247cbc40359bf$export$271c8c0f20afa0bd(box, transform) {
+    return new $hgUW1$Box3().setFromPoints([
+        new $hgUW1$Vector3(box.min.x, box.min.y, box.min.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.min.x, box.min.y, box.min.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.max.x, box.min.y, box.min.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.min.x, box.max.y, box.min.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.min.x, box.min.y, box.max.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.min.x, box.max.y, box.max.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.max.x, box.max.y, box.min.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.max.x, box.min.y, box.max.z).applyMatrix4(transform),
+        new $hgUW1$Vector3(box.max.x, box.max.y, box.max.z).applyMatrix4(transform), 
+    ]);
+}
+function $a82247cbc40359bf$export$4662b4e8868a3779(aabb, index) {
+    const min = aabb.min.clone();
+    const max = aabb.max.clone();
+    const size = new $hgUW1$Vector3().subVectors(max, min);
+    // tslint:disable-next-line:no-bitwise
+    if ((index & 1) > 0) min.z += size.z / 2;
+    else max.z -= size.z / 2;
+    // tslint:disable-next-line:no-bitwise
+    if ((index & 2) > 0) min.y += size.y / 2;
+    else max.y -= size.y / 2;
+    // tslint:disable-next-line:no-bitwise
+    if ((index & 4) > 0) min.x += size.x / 2;
+    else max.x -= size.x / 2;
+    return new $hgUW1$Box3(min, max);
+}
 
 
 class $262d91a572d1a9aa$export$9ad96d5c091c935a extends $c5e6e5ed2f67ba3c$export$9dd4354534a21f56 {
@@ -2027,7 +1587,6 @@ class $262d91a572d1a9aa$export$9ad96d5c091c935a extends $c5e6e5ed2f67ba3c$export
 }
 
 
-
 var $f7a27d90ab1a4cd4$exports = {};
 
 $parcel$export($f7a27d90ab1a4cd4$exports, "QueueItem", () => $f7a27d90ab1a4cd4$export$1b63de307530e1bc, (v) => $f7a27d90ab1a4cd4$export$1b63de307530e1bc = v);
@@ -2176,7 +1735,7 @@ var $46d1e842cf3bbf67$export$d4b568a022100543;
 // Worker JS names: "BinaryDecoderWorker.js", "DEMWorker.js", "EptBinaryDecoderWorker.js", "EptLaszipDecoderWorker.js",
 // EptZstandardDecoder_preamble.js", "EptZstandardDecoderWorker.js", "LASDecoderWorker.js", "LASLAZWorker.js", "LazLoaderWorker.js"
 function $46d1e842cf3bbf67$var$createWorker(type) {
-    console.log(type);
+    // console.log(type)
     switch(type){
         case $46d1e842cf3bbf67$export$d4b568a022100543.DECODER_WORKER_BROTLI:
             // const worker = require("./brotli-decoder.worker.js");
@@ -2703,6 +2262,117 @@ function $b22aa1edc2b6463b$var$getPrecision() {
 
 
 
+var $6917a634b1124b58$export$718faa7d6d01aabc;
+(function($6917a634b1124b58$export$718faa7d6d01aabc) {
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["POSITION_CARTESIAN"] = 0] = "POSITION_CARTESIAN";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["COLOR_PACKED"] = 1] = "COLOR_PACKED";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["COLOR_FLOATS_1"] = 2] = "COLOR_FLOATS_1";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["COLOR_FLOATS_255"] = 3] = "COLOR_FLOATS_255";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL_FLOATS"] = 4] = "NORMAL_FLOATS";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["FILLER"] = 5] = "FILLER";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["INTENSITY"] = 6] = "INTENSITY";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["CLASSIFICATION"] = 7] = "CLASSIFICATION";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL_SPHEREMAPPED"] = 8] = "NORMAL_SPHEREMAPPED";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL_OCT16"] = 9] = "NORMAL_OCT16";
+    $6917a634b1124b58$export$718faa7d6d01aabc[$6917a634b1124b58$export$718faa7d6d01aabc["NORMAL"] = 10] = "NORMAL";
+})($6917a634b1124b58$export$718faa7d6d01aabc || ($6917a634b1124b58$export$718faa7d6d01aabc = {
+}));
+const $6917a634b1124b58$export$f447a8ca794d62f1 = {
+    DATA_TYPE_DOUBLE: {
+        ordinal: 0,
+        size: 8
+    },
+    DATA_TYPE_FLOAT: {
+        ordinal: 1,
+        size: 4
+    },
+    DATA_TYPE_INT8: {
+        ordinal: 2,
+        size: 1
+    },
+    DATA_TYPE_UINT8: {
+        ordinal: 3,
+        size: 1
+    },
+    DATA_TYPE_INT16: {
+        ordinal: 4,
+        size: 2
+    },
+    DATA_TYPE_UINT16: {
+        ordinal: 5,
+        size: 2
+    },
+    DATA_TYPE_INT32: {
+        ordinal: 6,
+        size: 4
+    },
+    DATA_TYPE_UINT32: {
+        ordinal: 7,
+        size: 4
+    },
+    DATA_TYPE_INT64: {
+        ordinal: 8,
+        size: 8
+    },
+    DATA_TYPE_UINT64: {
+        ordinal: 9,
+        size: 8
+    }
+};
+function $6917a634b1124b58$var$makePointAttribute(name, type, numElements) {
+    return {
+        name: name,
+        type: type,
+        numElements: numElements,
+        byteSize: numElements * type.size
+    };
+}
+const $6917a634b1124b58$var$RGBA_PACKED = $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.COLOR_PACKED, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_INT8, 4);
+const $6917a634b1124b58$export$c9c943992b7ca9cc = {
+    POSITION_CARTESIAN: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.POSITION_CARTESIAN, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_FLOAT, 3),
+    RGBA_PACKED: $6917a634b1124b58$var$RGBA_PACKED,
+    COLOR_PACKED: $6917a634b1124b58$var$RGBA_PACKED,
+    RGB_PACKED: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.COLOR_PACKED, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_INT8, 3),
+    NORMAL_FLOATS: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_FLOATS, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_FLOAT, 3),
+    FILLER_1B: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.FILLER, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 1),
+    INTENSITY: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.INTENSITY, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT16, 1),
+    CLASSIFICATION: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.CLASSIFICATION, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 1),
+    NORMAL_SPHEREMAPPED: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_SPHEREMAPPED, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 2),
+    NORMAL_OCT16: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_OCT16, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_UINT8, 2),
+    NORMAL: $6917a634b1124b58$var$makePointAttribute($6917a634b1124b58$export$718faa7d6d01aabc.NORMAL, $6917a634b1124b58$export$f447a8ca794d62f1.DATA_TYPE_FLOAT, 3)
+};
+class $6917a634b1124b58$export$33a55c29cc28473e {
+    constructor(pointAttributeNames = []){
+        this.attributes = [];
+        this.byteSize = 0;
+        this.size = 0;
+        for(let i = 0; i < pointAttributeNames.length; i++){
+            const pointAttributeName = pointAttributeNames[i];
+            const pointAttribute = $6917a634b1124b58$export$c9c943992b7ca9cc[pointAttributeName];
+            this.attributes.push(pointAttribute);
+            this.byteSize += pointAttribute.byteSize;
+            this.size++;
+        }
+    }
+    add(pointAttribute) {
+        this.attributes.push(pointAttribute);
+        this.byteSize += pointAttribute.byteSize;
+        this.size++;
+    }
+    hasColors() {
+        return this.attributes.find($6917a634b1124b58$var$isColorAttribute) !== undefined;
+    }
+    hasNormals() {
+        return this.attributes.find($6917a634b1124b58$var$isNormalAttribute) !== undefined;
+    }
+}
+function $6917a634b1124b58$var$isColorAttribute({ name: name  }) {
+    return name === $6917a634b1124b58$export$718faa7d6d01aabc.COLOR_PACKED;
+}
+function $6917a634b1124b58$var$isNormalAttribute({ name: name  }) {
+    return name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_SPHEREMAPPED || name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_FLOATS || name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL || name === $6917a634b1124b58$export$718faa7d6d01aabc.NORMAL_OCT16;
+}
+
 
 var $b106f1b8d97b363d$exports = {};
 
@@ -2867,6 +2537,236 @@ class $ec0542d11ab1884c$export$53e052c61a1db49b {
 
 
 
+
+class $57aef60af449f0bf$export$bbcd90498494c738 {
+    constructor(loader, boundingBox, tightBoundingBox, offset, xhrRequest){
+        this.loader = loader;
+        this.boundingBox = boundingBox;
+        this.tightBoundingBox = tightBoundingBox;
+        this.offset = offset;
+        this.xhrRequest = xhrRequest;
+        this.disposed = false;
+        this.needsUpdate = true;
+        this.octreeDir = '';
+        this.hierarchyStepSize = -1;
+        this.nodes = {
+        };
+        this.numNodesLoading = 0;
+        this.maxNumNodesLoading = 3;
+        this.spacing = 0;
+        this.pointAttributes = new $6917a634b1124b58$export$33a55c29cc28473e([]);
+        this.projection = null;
+        this.url = null;
+    }
+    dispose() {
+        this.loader.dispose();
+        this.root.traverse((node)=>node.dispose()
+        );
+        this.disposed = true;
+    }
+    addNodeLoadedCallback(callback) {
+        this.loader.callbacks.push(callback);
+    }
+    clearNodeLoadedCallbacks() {
+        this.loader.callbacks = [];
+    }
+}
+
+
+
+
+
+const $2c1acd357a20f870$var$NODE_STRIDE = 5;
+class $2c1acd357a20f870$export$fdc7d6e1ad096869 extends $hgUW1$EventDispatcher {
+    constructor(name, pcoGeometry, boundingBox){
+        super();
+        this.id = $2c1acd357a20f870$export$fdc7d6e1ad096869.idCount++;
+        this.level = 0;
+        this.spacing = 0;
+        this.hasChildren = false;
+        this.children = [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null, 
+        ];
+        this.mean = new $hgUW1$Vector3();
+        this.numPoints = 0;
+        this.loaded = false;
+        this.loading = false;
+        this.failed = false;
+        this.parent = null;
+        this.oneTimeDisposeHandlers = [];
+        this.isLeafNode = true;
+        this.isTreeNode = false;
+        this.isGeometryNode = true;
+        this.name = name;
+        this.index = $5de7f1de3e851041$export$dd1fe7c4c1e496ce(name);
+        this.pcoGeometry = pcoGeometry;
+        this.boundingBox = boundingBox;
+        this.tightBoundingBox = boundingBox.clone();
+        this.boundingSphere = boundingBox.getBoundingSphere(new $hgUW1$Sphere());
+    }
+    dispose() {
+        if (!this.geometry || !this.parent) return;
+        this.geometry.dispose();
+        this.geometry = undefined;
+        this.loaded = false;
+        this.oneTimeDisposeHandlers.forEach((handler)=>handler()
+        );
+        this.oneTimeDisposeHandlers = [];
+    }
+    /**
+     * Gets the url of the binary file for this node.
+     */ getUrl() {
+        const geometry = this.pcoGeometry;
+        const version = geometry.loader.version;
+        const pathParts = [
+            geometry.octreeDir
+        ];
+        if (geometry.loader && version.equalOrHigher('1.5')) {
+            pathParts.push(this.getHierarchyBaseUrl());
+            pathParts.push(this.name);
+        } else if (version.equalOrHigher('1.4')) pathParts.push(this.name);
+        else if (version.upTo('1.3')) pathParts.push(this.name);
+        return pathParts.join('/');
+    }
+    /**
+     * Gets the url of the hierarchy file for this node.
+     */ getHierarchyUrl() {
+        return `${this.pcoGeometry.octreeDir}/${this.getHierarchyBaseUrl()}/${this.name}.hrc`;
+    }
+    /**
+     * Adds the specified node as a child of the current node.
+     *
+     * @param child
+     *    The node which is to be added as a child.
+     */ addChild(child) {
+        this.children[child.index] = child;
+        this.isLeafNode = false;
+        child.parent = this;
+    }
+    /**
+     * Calls the specified callback for the current node (if includeSelf is set to true) and all its
+     * children.
+     *
+     * @param cb
+     *    The function which is to be called for each node.
+     */ traverse(cb, includeSelf = true) {
+        const stack = includeSelf ? [
+            this
+        ] : [];
+        let current;
+        while((current = stack.pop()) !== undefined){
+            cb(current);
+            for (const child of current.children)if (child !== null) stack.push(child);
+        }
+    }
+    load() {
+        if (!this.canLoad()) return Promise.resolve();
+        this.loading = true;
+        this.pcoGeometry.numNodesLoading++;
+        this.pcoGeometry.needsUpdate = true;
+        let promise;
+        if (this.pcoGeometry.loader.version.equalOrHigher('1.5') && this.level % this.pcoGeometry.hierarchyStepSize === 0 && this.hasChildren) promise = this.loadHierachyThenPoints();
+        else promise = this.loadPoints();
+        return promise.catch((reason)=>{
+            this.loading = false;
+            this.failed = true;
+            this.pcoGeometry.numNodesLoading--;
+            throw reason;
+        });
+    }
+    canLoad() {
+        return !this.loading && !this.loaded && !this.pcoGeometry.disposed && !this.pcoGeometry.loader.disposed && this.pcoGeometry.numNodesLoading < this.pcoGeometry.maxNumNodesLoading;
+    }
+    loadPoints() {
+        this.pcoGeometry.needsUpdate = true;
+        return this.pcoGeometry.loader.load(this);
+    }
+    loadHierachyThenPoints() {
+        if (this.level % this.pcoGeometry.hierarchyStepSize !== 0) return Promise.resolve();
+        return Promise.resolve(this.pcoGeometry.loader.getUrl(this.getHierarchyUrl())).then((url)=>this.pcoGeometry.xhrRequest(url, {
+                mode: 'cors'
+            })
+        ).then((res)=>res.arrayBuffer()
+        ).then((data)=>this.loadHierarchy(this, data)
+        );
+    }
+    /**
+     * Gets the url of the folder where the hierarchy is, relative to the octreeDir.
+     */ getHierarchyBaseUrl() {
+        const hierarchyStepSize = this.pcoGeometry.hierarchyStepSize;
+        const indices = this.name.substr(1);
+        const numParts = Math.floor(indices.length / hierarchyStepSize);
+        let path = 'r/';
+        for(let i = 0; i < numParts; i++)path += `${indices.substr(i * hierarchyStepSize, hierarchyStepSize)}/`;
+        return path.slice(0, -1);
+    }
+    // tslint:disable:no-bitwise
+    loadHierarchy(node, buffer) {
+        const view = new DataView(buffer);
+        const firstNodeData = this.getNodeData(node.name, 0, view);
+        node.numPoints = firstNodeData.numPoints;
+        // Nodes which need be visited.
+        const stack = [
+            firstNodeData
+        ];
+        // Nodes which have already been decoded. We will take nodes from the stack and place them here.
+        const decoded = [];
+        let offset = $2c1acd357a20f870$var$NODE_STRIDE;
+        while(stack.length > 0){
+            const stackNodeData = stack.shift();
+            // From the last bit, all the way to the 8th one from the right.
+            let mask = 1;
+            for(let i = 0; i < 8 && offset + 1 < buffer.byteLength; i++){
+                if ((stackNodeData.children & mask) !== 0) {
+                    const nodeData = this.getNodeData(stackNodeData.name + i, offset, view);
+                    decoded.push(nodeData); // Node is decoded.
+                    stack.push(nodeData); // Need to check its children.
+                    offset += $2c1acd357a20f870$var$NODE_STRIDE; // Move over to the next node in the buffer.
+                }
+                mask = mask * 2;
+            }
+        }
+        node.pcoGeometry.needsUpdate = true;
+        // Map containing all the nodes.
+        const nodes = new Map();
+        nodes.set(node.name, node);
+        decoded.forEach((nodeData)=>this.addNode(nodeData, node.pcoGeometry, nodes)
+        );
+        node.loadPoints();
+    }
+    // tslint:enable:no-bitwise
+    getNodeData(name, offset, view) {
+        const children = view.getUint8(offset);
+        const numPoints = view.getUint32(offset + 1, true);
+        return {
+            children: children,
+            numPoints: numPoints,
+            name: name
+        };
+    }
+    addNode({ name: name , numPoints: numPoints , children: children  }, pco, nodes) {
+        const index = $5de7f1de3e851041$export$dd1fe7c4c1e496ce(name);
+        const parentName = name.substring(0, name.length - 1);
+        const parentNode = nodes.get(parentName);
+        const level = name.length - 1;
+        const boundingBox = $a82247cbc40359bf$export$4662b4e8868a3779(parentNode.boundingBox, index);
+        const node = new $2c1acd357a20f870$export$fdc7d6e1ad096869(name, pco, boundingBox);
+        node.level = level;
+        node.numPoints = numPoints;
+        node.hasChildren = children > 0;
+        node.spacing = pco.spacing / Math.pow(2, level);
+        parentNode.addChild(node);
+        nodes.set(name, node);
+    }
+}
+$2c1acd357a20f870$export$fdc7d6e1ad096869.idCount = 0;
 
 
 
@@ -3505,5 +3405,5 @@ var $633d133e959bcfd9$exports = {};
 
 
 
-export {$deb88b7421585e89$export$852cc38ee6d1f105 as PointCloudOctreePicker, $f7a27d90ab1a4cd4$export$1b63de307530e1bc as QueueItem, $f7a27d90ab1a4cd4$export$a7e9de55738dd76b as Potree, $f7a27d90ab1a4cd4$exports as default, $b106f1b8d97b363d$export$682c179f50ab847d as Version, $262d91a572d1a9aa$export$9ad96d5c091c935a as PointCloudOctree, $886301ae952e8f57$export$ec8ead0ea9fedf30 as BlurMaterial, $7b3263892bf52898$export$e04e7431702ec10a as ClipMode, $5e4fff88bfda53ee$export$d1cbf822ea081fee as PointSizeType, $5e4fff88bfda53ee$export$5ffaab227f4e4906 as PointShape, $5e4fff88bfda53ee$export$eaf124a76310c668 as TreeType, $5e4fff88bfda53ee$export$b3da46a9b4c877b5 as PointOpacityType, $5e4fff88bfda53ee$export$e95c0b95a8f50828 as PointColorType, $104fbfc219aa06c4$export$29121d9ccd2f757a as PointCloudMaterial, $104fbfc219aa06c4$exports as default, $3fa0b589b7342ac5$export$1e96beb2edc20271 as generateDataTexture, $3fa0b589b7342ac5$export$fdceb370ef27f1c7 as generateGradientTexture, $3fa0b589b7342ac5$export$20a331fc7ad618b2 as generateClassificationTexture, $e9094b64304453a9$export$795f08762ba1b68c as GRAYSCALE, $de7fe8deb64de9a4$export$26ffe1805c7bf718 as INFERNO, $b45e8c3ed76e3d5b$export$6c89e34c5e9ab660 as PLASMA, $4982ed7e4b958d27$export$fc43e6ea480ea76f as RAINBOW, $855161ee86562854$export$8beb2468e5d7f653 as SPECTRAL, $874a1d158524c990$export$d793f114aad17738 as VIRIDIS, $2dd88a2a4c2e9932$export$c97e84e6a442ddd4 as YELLOW_GREEN, $6917a634b1124b58$export$718faa7d6d01aabc as PointAttributeName, $6917a634b1124b58$export$f447a8ca794d62f1 as POINT_ATTRIBUTE_TYPES, $6917a634b1124b58$export$c9c943992b7ca9cc as POINT_ATTRIBUTES, $6917a634b1124b58$export$33a55c29cc28473e as PointAttributes, $2c1acd357a20f870$export$fdc7d6e1ad096869 as PointCloudOctreeGeometryNode, $57aef60af449f0bf$export$bbcd90498494c738 as PointCloudOctreeGeometry, $5b22ec763ed6bfa5$export$ac5505afea26905b as PointCloudOctreeNode, $c5e6e5ed2f67ba3c$export$9dd4354534a21f56 as PointCloudTree};
+export {$f7a27d90ab1a4cd4$export$1b63de307530e1bc as QueueItem, $f7a27d90ab1a4cd4$export$a7e9de55738dd76b as Potree, $f7a27d90ab1a4cd4$exports as default, $b106f1b8d97b363d$export$682c179f50ab847d as Version, $262d91a572d1a9aa$export$9ad96d5c091c935a as PointCloudOctree};
 //# sourceMappingURL=module.js.map
