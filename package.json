@@ -1,7 +1,6 @@
 {
   "name": "potree-loader",
-  "private": true,
-  "version": "1.8.0",
+  "version": "1.9.1",
   "description": "WebGL point cloud viewer",
   "keywords": [
     "point",
