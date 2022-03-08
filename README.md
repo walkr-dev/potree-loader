@@ -6,7 +6,7 @@ This is a fork of [three-loader](https://github.com/pnext/three-loader), which i
 
 ```typescript
 import { Scene } from 'three';
-import { PointCloudOctree, Potree } from '@shiukaheng/potree-loader';
+import { PointCloudOctree, Potree } from 'potree-loader';
 
 const scene = new Scene();
 // Manages the necessary state for loading/updating one or more point clouds.
