@@ -4,22 +4,22 @@ export enum WorkerType {
 	DECODER_WORKER = "DECODER_WORKER",
 }
 
-// Worker JS names: "BinaryDecoderWorker.js", "DEMWorker.js", "EptBinaryDecoderWorker.js", "EptLaszipDecoderWorker.js",
-// EptZstandardDecoder_preamble.js", "EptZstandardDecoderWorker.js", "LASDecoderWorker.js", "LASLAZWorker.js", "LazLoaderWorker.js"
-
 function createWorker(type: WorkerType): Worker {
-	switch (type) {
-		case WorkerType.DECODER_WORKER_BROTLI: {
-            const worker = require("./brotli-decoder.worker.js");
-            return new worker();
-        }
-		case WorkerType.DECODER_WORKER: {
-            let ctor = require("./decoder.worker.js");
-            return new ctor();
-        }
-		default:
-			throw new Error("Unknown worker type");
-	}
+	type
+	const ctor = require('./decoder.worker.js');
+    return new ctor();
+	// switch (type) {
+	// 	case WorkerType.DECODER_WORKER_BROTLI: {
+    //         // const ctor = require("./brotli-decoder.worker.js");
+    //         // return new ctor();
+    //     }
+	// 	case WorkerType.DECODER_WORKER: {
+    //         // let ctor = require("./decoder.worker.js");
+    //         // return new ctor();
+    //     }
+	// 	default:
+	// 		throw new Error("Unknown worker type");
+	// }
 }
 
 

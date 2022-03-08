@@ -165,7 +165,6 @@ export class BinaryLoader {
     if (worker) {
       return worker;
     }
-
     const ctor = require('../workers/binary-decoder.worker.js');
 
     return new ctor();

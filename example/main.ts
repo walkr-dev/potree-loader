@@ -46,17 +46,17 @@ viewer
 })
 .catch(err => console.error(err));
 
-viewer
-.load(
-  'metadata.json',
-  'http://localhost:8080/BigShotCleanV2/',
-)
-.then(pco => {
-  pointCloud = pco;
-  pointCloud.material.size = 1.0;
-  pointCloud.position.set(0, -2, 1)
-  pointCloud.scale.set(.1, .1, .1);
-  viewer.add(pco);
-})
-.catch(err => console.error(err));
+// viewer
+// .load(
+//   'metadata.json',
+//   'http://localhost:8080/BigShotCleanV2/',
+// )
+// .then(pco => {
+//   pointCloud = pco;
+//   pointCloud.material.size = 1.0;
+//   pointCloud.position.set(0, -2, 1)
+//   pointCloud.scale.set(.1, .1, .1);
+//   viewer.add(pco);
+// })
+// .catch(err => console.error(err));
 

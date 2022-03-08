@@ -3,7 +3,7 @@
 import {PointAttribute, PointAttributeTypes} from "./PointAttributes";
 import {BrotliDecode} from "./libs/brotli/decode";
 
-const typedArrayMapping = {
+typedArrayMapping = { // Not sure why if this is declared with const, it doesn't compile
 	"int8":   Int8Array,
 	"int16":  Int16Array,
 	"int32":  Int32Array,
