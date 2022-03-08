@@ -3,7 +3,7 @@ import { PointCloudOctree, Potree } from '../src';
 
 // tslint:disable-next-line:no-duplicate-imports
 import * as THREE from 'three';
-const OrbitControls = require('three-orbit-controls')(THREE);
+// const OrbitControls = require('three-orbit-controls')(THREE);
 
 export class Viewer {
   /**
@@ -57,7 +57,7 @@ export class Viewer {
     this.targetEl = targetEl;
     targetEl.appendChild(this.renderer.domElement);
 
-    this.cameraControls = new OrbitControls(this.camera, this.targetEl);
+    // this.cameraControls = new OrbitControls(this.camera, this.targetEl);
 
     this.resize();
     window.addEventListener('resize', this.resize);
@@ -123,7 +123,7 @@ export class Viewer {
   update(_: number): void {
     // Alternatively, you could use Three's OrbitControls or any other
     // camera control system.
-    this.cameraControls.update();
+    // this.cameraControls.update();
 
     // This is where most of the potree magic happens. It updates the
     // visiblily of the octree nodes based on the camera frustum and it
