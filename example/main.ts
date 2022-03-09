@@ -2,7 +2,7 @@ import { Vector3 } from 'three';
 import { PointCloudOctree } from '../src';
 import { Viewer } from './viewer';
 
-require('./main.css');
+import styles from "main.css"
 
 const targetEl = document.createElement('div');
 targetEl.className = 'container';
@@ -33,23 +33,8 @@ unloadBtn.addEventListener('click', () => {
 
 viewer
 .load(
-  'cloud.js',
-  'http://localhost:8080/BigShotCleanV1/',
-)
-.then(pco => {
-  pointCloud = pco;
-  pointCloud.material.size = 1.0;
-  pointCloud.position.set(-4, -2, 1)
-  pointCloud.scale.set(.1, .1, .1);
-
-  viewer.add(pco);
-})
-.catch(err => console.error(err));
-
-viewer
-.load(
   'metadata.json',
-  'http://localhost:8080/BigShotCleanV2/',
+  'https://static.thelostmetropolis.org/BigShotCleanV2/',
 )
 .then(pco => {
   pointCloud = pco;

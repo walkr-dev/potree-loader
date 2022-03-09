@@ -71,7 +71,7 @@ let decompress = function(schema, input, numPoints) {
   return ret.buffer;
 };
 
-Potree = {};
+// Potree = {};
 
 onmessage = function(event) {
   let NUM_POINTS_BYTES = 4;
