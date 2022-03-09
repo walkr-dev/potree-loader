@@ -141,9 +141,9 @@ export class NodeLoader{
 			node.loading = false;
 			node.octreeGeometry.numNodesLoading--;
 
-			console.log(`failed to load ${node.name}`);
-			console.log(e);
-			console.log(`trying again!`);
+			// console.log(`failed to load ${node.name}`);
+			// console.log(e);
+			// console.log(`trying again!`);
 		}
 	}
 
@@ -399,7 +399,7 @@ export class OctreeLoader{
 		let metadata: Metadata = await response.json();
 
 		let attributes = OctreeLoader.parseAttributes(metadata.attributes);
-		console.log(attributes)
+		// console.log(attributes)
 
 		let loader = new NodeLoader(url, this.workerPool, metadata);
 		loader.attributes = attributes;

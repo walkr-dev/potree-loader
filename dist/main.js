@@ -2008,9 +2008,9 @@ class $f1f2261762d43167$export$f768aec11625a454 {
                 node.loaded = false;
                 node.loading = false;
                 node.octreeGeometry.numNodesLoading--;
-                console.log(`failed to load ${node.name}`);
-                console.log(e);
-                console.log(`trying again!`);
+            // console.log(`failed to load ${node.name}`);
+            // console.log(e);
+            // console.log(`trying again!`);
             }
         });
     }
@@ -2172,7 +2172,7 @@ class $f1f2261762d43167$export$67f2c69805865032 {
             let response = yield xhrRequest(url);
             let metadata = yield response.json();
             let attributes = $f1f2261762d43167$export$67f2c69805865032.parseAttributes(metadata.attributes);
-            console.log(attributes);
+            // console.log(attributes)
             let loader = new $f1f2261762d43167$export$f768aec11625a454(url, this.workerPool, metadata);
             loader.attributes = attributes;
             loader.scale = metadata.scale;
