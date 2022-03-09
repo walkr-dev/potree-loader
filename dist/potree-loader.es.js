@@ -1378,10 +1378,10 @@ var WorkerType = /* @__PURE__ */ ((WorkerType2) => {
 function createWorker(type) {
   switch (type) {
     case "DECODER_WORKER_BROTLI": {
-      return new Worker("/assets/brotli-decoder.worker.6a6397b9.js", { type: "module" });
+      return new Worker("/assets/brotli-decoder.worker.dad1d98a.js", { type: "module" });
     }
     case "DECODER_WORKER": {
-      return new Worker("/assets/decoder.worker.5b359db1.js", { type: "module" });
+      return new Worker("/assets/decoder.worker.942d0cda.js", { type: "module" });
     }
     default:
       throw new Error("Unknown worker type");
