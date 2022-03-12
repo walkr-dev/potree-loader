@@ -1,3 +1,6 @@
+import BrotliDecoderWorker from "./brotli-decoder.worker.js?worker&inline"
+import DecoderWorker from "./decoder.worker.js?worker&inline"
+
 // Create enums for different types of workers
 export enum WorkerType {
 	DECODER_WORKER_BROTLI = "DECODER_WORKER_BROTLI",
@@ -13,18 +16,20 @@ function createWorker(type: WorkerType): Worker {
 		case WorkerType.DECODER_WORKER_BROTLI: {
             // const worker = require("./brotli-decoder.worker.js");
             // return new worker();
-			return new Worker(
-				new URL('./brotli-decoder.worker.js', import.meta.url),
-				{ type: 'module' },
-			)
+			// return new Worker(
+			// 	new URL('./brotli-decoder.worker.js', import.meta.url),
+			// 	{ type: 'module' },
+			// )
+			return new BrotliDecoderWorker()
         }
 		case WorkerType.DECODER_WORKER: {
             // let ctor = require("./decoder.worker.js");
             // return new ctor();
-			return new Worker(
-				new URL('./decoder.worker.js', import.meta.url),
-				{ type: 'module' },
-			)
+			// return new Worker(
+			// 	new URL('./decoder.worker.js', import.meta.url),
+			// 	{ type: 'module' },
+			// )
+			return new DecoderWorker()
         }
 		default:
 			throw new Error("Unknown worker type");

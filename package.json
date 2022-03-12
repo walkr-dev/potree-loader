@@ -21,7 +21,6 @@
     "@types/three": "^0.138.0",
     "parcel": "^2.3.2",
     "proj4": "^2.7.5",
-    "three": "^0.138.3",
     "vite": "^2.8.6"
   },
   "files": [
@@ -43,5 +42,8 @@
     "parcel-transformer-tsc-sourcemaps": "^1.0.2",
     "typescript": ">=3.0.0",
     "vite-plugin-glsl": "^0.1.1"
+  },
+  "peerDependencies": {
+    "three": "^0.138.3"
   }
 }

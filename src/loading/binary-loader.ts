@@ -8,6 +8,8 @@ import { PointCloudOctreeGeometryNode } from '../point-cloud-octree-geometry-nod
 import { Version } from '../version';
 import { GetUrlFn, XhrRequest } from './types';
 
+import ClassicWorker from "../workers/binary-decoder.worker.js?worker&inline";
+
 interface AttributeData {
   attribute: {
     name: PointAttributeName;
@@ -166,10 +168,11 @@ export class BinaryLoader {
       return worker;
     }
 
-    return new Worker(
-      new URL('../workers/binary-decoder.worker.js', import.meta.url),
-      { type: 'module' },
-    )
+    // return new Worker(
+    //   new URL('../workers/binary-decoder.worker.js', import.meta.url),
+    //   { type: 'module' },
+    // )
+    return new ClassicWorker();
   }
 
   private releaseWorker(worker: Worker): void {
