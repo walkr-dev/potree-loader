@@ -10,5 +10,10 @@ export default defineConfig({
       name: 'potree-loader',
       fileName: (format) => `potree-loader.${format}.js`
     }
+  },
+  resolve: {
+    alias: {
+      'three': resolve('./node_modules/three')
+    }
   }
 })
