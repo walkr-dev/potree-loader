@@ -117,10 +117,13 @@ uniform sampler2D depthMap;
 
 /**
  * Rounds the specified number to the closest integer.
+ *
+ * This method has been commented out due to the fact that it doesn't work on various (mobile) browers.
+ * ERROR: 0:128: 'round' : Name of a built-in function cannot be redeclared as function
  */
-float round(float number){
-	return floor(number + 0.5);
-}
+// float round(float number){
+// 	return floor(number + 0.5);
+// }
 
 /**
  * Gets the number of 1-bits up to inclusive index position.
