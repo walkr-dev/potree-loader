@@ -3125,7 +3125,7 @@ uniform sampler2D depthMap;
  *\r
  * This method has been commented out due to the fact that it doesn't work on various (mobile) browers.\r
  * ERROR: 0:128: 'round' : Name of a built-in function cannot be redeclared as function\r
- */\r
+ */
 
 /**\r
  * Gets the number of 1-bits up to inclusive index position.\r
