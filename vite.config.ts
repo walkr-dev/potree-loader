@@ -8,8 +8,9 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'potree-loader',
-      fileName: (format) => `potree-loader.${format}.js`
-    }
+      fileName: (format) => `potree-loader.${format}.js`,
+    },
+    sourcemap: true,
   },
   resolve: {
     alias: {
