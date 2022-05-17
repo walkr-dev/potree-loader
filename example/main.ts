@@ -40,6 +40,7 @@ viewer
   pointCloud = pco;
   pointCloud.material.size = 1.0;
   pointCloud.material.shape = 2;
+  pointCloud.material.outputColorEncoding = 1;
   pointCloud.position.set(0, -2, 1)
   pointCloud.scale.set(.1, .1, .1);
   viewer.add(pco);

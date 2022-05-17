@@ -40,6 +40,7 @@ import {
   generateGradientTexture,
 } from './texture-generation';
 import { IClassification, IGradient, IUniform } from './types';
+import { ColorEncoding } from './color-encoding';
 
 export interface IPointCloudMaterialParameters {
   size: number;
@@ -143,6 +144,11 @@ const CLIP_MODE_DEFS = {
   [ClipMode.CLIP_OUTSIDE]: 'clip_outside',
   [ClipMode.HIGHLIGHT_INSIDE]: 'clip_highlight_inside',
 };
+
+const COLOR_ENCODING = {
+  [ColorEncoding.LINEAR]: 'color_encoding_linear',
+  [ColorEncoding.SRGB]: 'color_encoding_sRGB',
+}
 
 export class PointCloudMaterial extends RawShaderMaterial {
   private static helperVec3 = new Vector3();
@@ -248,6 +254,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
   @uniform('enablePointHighlighting') enablePointHighlighting!: boolean;
   @uniform('highlightedPointScale') highlightedPointScale!: number;
 
+  // Declare PointCloudMaterial attributes that need shader updates upon change, and set default values.
   @requiresShaderUpdate() useClipBox: boolean = false;
   @requiresShaderUpdate() weighted: boolean = false;
   @requiresShaderUpdate() pointColorType: PointColorType = PointColorType.RGB;
@@ -259,6 +266,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
   @requiresShaderUpdate() pointOpacityType: PointOpacityType = PointOpacityType.FIXED;
   @requiresShaderUpdate() useFilterByNormal: boolean = false;
   @requiresShaderUpdate() highlightPoint: boolean = false;
+  @requiresShaderUpdate() outputColorEncoding: ColorEncoding = ColorEncoding.LINEAR;
 
   attributes = {
     position: { type: 'fv', value: [] },
@@ -374,6 +382,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
     define(COLOR_DEFS[this.pointColorType]);
     define(CLIP_MODE_DEFS[this.clipMode]);
     define(OPACITY_DEFS[this.pointOpacityType]);
+    define(COLOR_ENCODING[this.outputColorEncoding]);
 
     // We only perform gamma and brightness/contrast calculations per point if values are specified.
     if (
