@@ -1,11 +1,12 @@
 # README
 
-This is a fork of [three-loader](https://github.com/pnext/three-loader), which itself is a modularized version of [Potree](http://potree.org/). This fork is updated to support the new PotreeConverter 2.0 format, updated to use WebGL2, and has the bundler changed to Vite. The API is identical to the original version.
+This is a fork of [three-loader](https://github.com/pnext/three-loader), which itself is a modularized version of [Potree](http://potree.org/). This fork is updated to support the new PotreeConverter 2.0 format, updated to use WebGL2, and has the bundler changed to Vite. The API is identical to the original version. I am mainly using this for a [heritage archive project](https://thelostmetropolis.org).
 
 # Known issues
-- Safari / iOS not supported
-- WebXR not supported
+- WebXR not yet supported
 - Warning about THREE being imported twice
+
+# 
 
 # Usage
 
