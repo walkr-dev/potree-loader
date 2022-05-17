@@ -3,6 +3,7 @@ import { PointCloudOctree } from '../src';
 import { Viewer } from './viewer';
 
 import "./main.css"
+import { PointCloudMaterial } from '../src/materials';
 
 const targetEl = document.createElement('div');
 targetEl.className = 'container';
@@ -40,6 +41,7 @@ viewer
   pointCloud = pco;
   pointCloud.material.size = 1.0;
   pointCloud.material.shape = 2;
+  pointCloud.material.inputColorEncoding = 1;
   pointCloud.material.outputColorEncoding = 1;
   pointCloud.position.set(0, -2, 1)
   pointCloud.scale.set(.1, .1, .1);
