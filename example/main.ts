@@ -2,7 +2,7 @@ import { Vector3 } from 'three';
 import { PointCloudOctree } from '../src';
 import { Viewer } from './viewer';
 
-import styles from "main.css"
+import "./main.css"
 
 const targetEl = document.createElement('div');
 targetEl.className = 'container';

@@ -17,3 +17,7 @@ body,
 .btn-container button {
   margin-right: 10px;
 }
+
+body {
+  margin: 0;
+}

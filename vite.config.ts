@@ -10,6 +10,7 @@ export default defineConfig({
       name: 'potree-loader',
       fileName: (format) => `potree-loader.${format}.js`,
     },
+    
     sourcemap: true,
   },
   resolve: {
