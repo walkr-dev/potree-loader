@@ -26749,4 +26749,3 @@ class Potree {
   }
 }
 export { PointCloudOctree, Potree, QueueItem, Version };
-//# sourceMappingURL=potree-loader.es.js.map
